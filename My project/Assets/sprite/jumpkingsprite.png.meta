@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 30
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -100,10 +100,10 @@ TextureImporter:
       name: jumpkingsprite_0
       rect:
         serializedVersion: 2
-        x: 71
-        y: 302
-        width: 7
-        height: 73
+        x: 52
+        y: 479
+        width: 24
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,10 +121,10 @@ TextureImporter:
       name: jumpkingsprite_1
       rect:
         serializedVersion: 2
-        x: 161
-        y: 371
-        width: 6
-        height: 9
+        x: 82
+        y: 480
+        width: 31
+        height: 26
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,6 +134,1497 @@ TextureImporter:
       bones: []
       spriteID: e5d353586ad2c43bd855fd6011678d75
       internalID: 1761275160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_2
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 479
+        width: 25
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e98e131b85ee2b46b480f68e24210ed
+      internalID: 1733541445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_3
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 480
+        width: 30
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f9797ff64ec4e446a2e3744ef66b4de
+      internalID: -827729250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_4
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 479
+        width: 30
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de23443cbb1655243af3771a24963f90
+      internalID: -255239977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_5
+      rect:
+        serializedVersion: 2
+        x: 212
+        y: 479
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 037c2f3bce71b9848b3b5a0cf6e74a4f
+      internalID: 1685787691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_6
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 479
+        width: 28
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abf65e40596cb0a41a2d5cdee3435135
+      internalID: 1725066220
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_7
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 479
+        width: 29
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f44f7edf74fc634ab96bc368c613db4
+      internalID: -1005427385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_8
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 479
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6158a7e81833fc944b2f9a0b0b6ae5c7
+      internalID: 1599145675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_9
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 447
+        width: 30
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5872a381361a33546977d9752131241a
+      internalID: -1735409618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_10
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 447
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9120afe790dcf8c468a22154b886d38a
+      internalID: 1764244889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_11
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 447
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a57ec1fb2d093a4aa9d9bd71d7e358d
+      internalID: 499854384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_12
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 447
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b45ff9470d759b14188e7d35442092e7
+      internalID: 870932910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_13
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 408
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6a57796df42aa745a93b8ca96ca9bd8
+      internalID: -1449458198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_14
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 408
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b041005d16d8e544ab630fc5ce4f0656
+      internalID: 1993833680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_15
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 408
+        width: 25
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad5535b1e4c58c148ba13b297563477c
+      internalID: 649480275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_16
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 408
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd2945453efbb494d9e2bb39364bd6bd
+      internalID: -66970498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_17
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 407
+        width: 30
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87626c71f0a4a22459215b2c16bf2849
+      internalID: 1684854855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_18
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 408
+        width: 28
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c306a9f036ad52648a88c0bd4a44fc5c
+      internalID: 1221049899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_19
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 408
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e6cbb82d6872c47b53ab6336f1e45d
+      internalID: 1185921149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_20
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 408
+        width: 31
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 821bac8b0d262fd4bb5865709dbf6b6d
+      internalID: -982761922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_21
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 408
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eba875dbcf6c80f47ad2f3b54a43520a
+      internalID: 131095189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_22
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 376
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 571207db8f2347e4fa3f45f27cb3986a
+      internalID: -2141960491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_23
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 376
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e1921f6b36449f48a480cce82fded33
+      internalID: -730841637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_24
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 376
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 301f06f65a346174492f894ee13e5e88
+      internalID: 1750146088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_25
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 376
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d1368cc024e1ba4d86a8a5f94bda526
+      internalID: -1701941872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_26
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 340
+        width: 24
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6109a4fe0c0a0ee44b3a37abf5adc67a
+      internalID: 333118997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_27
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 341
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1057154548b4e741ad04823c094bb49
+      internalID: 304943743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_28
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 340
+        width: 22
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa3eb9e49c6af841a39ec39178ecbb7
+      internalID: 1100421760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_29
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 341
+        width: 24
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31e2b3310e471e44a929615c77471cc3
+      internalID: -837383926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_30
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 368
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63a29cf9d1c2435418055bcd0d194af7
+      internalID: 11180126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_31
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 340
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18b7732f3fde84841a15524316b455af
+      internalID: 1600629626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_32
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 340
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72cd0d152387ca04da81f4aedf20bed3
+      internalID: -50531771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_33
+      rect:
+        serializedVersion: 2
+        x: 215
+        y: 340
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c0d8ee7bc85d584691b79953daa0b6d
+      internalID: 2072345239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_34
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 340
+        width: 24
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15b25b1b98b964a438cb709c7029fbaf
+      internalID: -1728070308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_35
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 308
+        width: 40
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 917a649141615d54e97add010dcf665d
+      internalID: 1653551095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_36
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 308
+        width: 24
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 989245e1d72c10d42804bdf6f2099cd0
+      internalID: 424982989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_37
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 308
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17d6ca2137bcd6849adf62b6117a80dc
+      internalID: 189971010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_38
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 308
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5302bb702272c9d4088fdf985dbc3385
+      internalID: -1357195554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_39
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 309
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccedf3550da91ec43950e2b4705ceb52
+      internalID: 26354884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_40
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 308
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f5808e22ec0b804e9066eb3829ce486
+      internalID: 2096356236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_41
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 309
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6678cf791c465ab44b136578cf8e9ad8
+      internalID: -1567761065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_42
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 309
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1f213167a5115648b74b688c698c1c5
+      internalID: -884967847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_43
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 308
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d5205f9425506143ab25d78a5f3d960
+      internalID: -500062982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_44
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 309
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b25d7614a777801498f1c802a32fb7f3
+      internalID: 998009282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_45
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 308
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d4365653749f4cf449942400f2a09d2a
+      internalID: 384242165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_46
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 240
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5d689204d8165740a1796f7f8995af5
+      internalID: 1358307543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_47
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 240
+        width: 44
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96f65bf455acda74aa0afb2faa9f698b
+      internalID: -712527992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_48
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 240
+        width: 47
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be296109e664dc4980e9ade89287a92
+      internalID: 1929110524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_49
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 240
+        width: 46
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b02d36f043e4b134098a5998471daac3
+      internalID: 1468520407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_50
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 240
+        width: 46
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7d1ffda5c2897fd42bf2f7cc84c95111
+      internalID: 1377930589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_51
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 176
+        width: 47
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c96487249dc317b43bb2ab09c24392ac
+      internalID: 976455606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_52
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 176
+        width: 46
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26263609a2e9ed04bb47a6059dcbc376
+      internalID: -159104138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_53
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 176
+        width: 46
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19418f1669b265c49b56301c9da7d311
+      internalID: -1764024921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_54
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 140
+        width: 42
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cce7b215f57e67943955c7f60a3e15e6
+      internalID: 685605636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_55
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 140
+        width: 27
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 874487f4b72871d4796f386375ba33c5
+      internalID: -1849920377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_56
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 140
+        width: 31
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9efcab39a6fb4c14c902dc6183d5a7a6
+      internalID: 1450573275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_57
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 140
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e42d1d616f109914a9f24e6b1631c205
+      internalID: -233691725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_58
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 140
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dcf013bc16185f4d94afaa559753b92
+      internalID: -1486237627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_59
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 140
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f5da0f9c4846f46bfc99f0b49da4c3
+      internalID: 538692578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_60
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 140
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa4a3d2a9ddec8143b9059b82a71682a
+      internalID: 1528850927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_61
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 140
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 190af106f158f1e44b88d44faf3e988e
+      internalID: -1141168020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_62
+      rect:
+        serializedVersion: 2
+        x: 275
+        y: 140
+        width: 30
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8bac5fea44a9d94cae2293ce23cb90d
+      internalID: 1470257508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_63
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 140
+        width: 30
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24f838d6aa689154097b9facb8f723b4
+      internalID: 1206167467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_64
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 140
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd185d48e64975a4c94125a21a832690
+      internalID: -887217012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_65
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 72
+        width: 33
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78007f337ca5aee4db02a0174adbb708
+      internalID: -1786765255
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_66
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 72
+        width: 44
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59b76887778e6df40857b7d15e8d8ad9
+      internalID: -271834573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_67
+      rect:
+        serializedVersion: 2
+        x: 190
+        y: 72
+        width: 47
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8eeaf2dbb0249841bd85ee9d1ba6633
+      internalID: -983183358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_68
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 72
+        width: 46
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8ac5b42cd166d443b6e14d5c946025e
+      internalID: 663211196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_69
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 72
+        width: 46
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 208431b8b828ae2478e09eca4246b98b
+      internalID: -1100271946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_70
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 8
+        width: 47
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 050e93cfa5664d246ad81e40f096e0fe
+      internalID: -366339813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_71
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 8
+        width: 46
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8ec7d62d31c96f4b842c666fe5d6e03
+      internalID: -1886535194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jumpkingsprite_72
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 8
+        width: 46
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a5f45856aee8214cb076239528dca35
+      internalID: 1827609327
       vertices: []
       indices: 
       edges: []
@@ -151,6 +1642,77 @@ TextureImporter:
     nameFileIdTable:
       jumpkingsprite_0: 1360978811
       jumpkingsprite_1: 1761275160
+      jumpkingsprite_10: 1764244889
+      jumpkingsprite_11: 499854384
+      jumpkingsprite_12: 870932910
+      jumpkingsprite_13: -1449458198
+      jumpkingsprite_14: 1993833680
+      jumpkingsprite_15: 649480275
+      jumpkingsprite_16: -66970498
+      jumpkingsprite_17: 1684854855
+      jumpkingsprite_18: 1221049899
+      jumpkingsprite_19: 1185921149
+      jumpkingsprite_2: 1733541445
+      jumpkingsprite_20: -982761922
+      jumpkingsprite_21: 131095189
+      jumpkingsprite_22: -2141960491
+      jumpkingsprite_23: -730841637
+      jumpkingsprite_24: 1750146088
+      jumpkingsprite_25: -1701941872
+      jumpkingsprite_26: 333118997
+      jumpkingsprite_27: 304943743
+      jumpkingsprite_28: 1100421760
+      jumpkingsprite_29: -837383926
+      jumpkingsprite_3: -827729250
+      jumpkingsprite_30: 11180126
+      jumpkingsprite_31: 1600629626
+      jumpkingsprite_32: -50531771
+      jumpkingsprite_33: 2072345239
+      jumpkingsprite_34: -1728070308
+      jumpkingsprite_35: 1653551095
+      jumpkingsprite_36: 424982989
+      jumpkingsprite_37: 189971010
+      jumpkingsprite_38: -1357195554
+      jumpkingsprite_39: 26354884
+      jumpkingsprite_4: -255239977
+      jumpkingsprite_40: 2096356236
+      jumpkingsprite_41: -1567761065
+      jumpkingsprite_42: -884967847
+      jumpkingsprite_43: -500062982
+      jumpkingsprite_44: 998009282
+      jumpkingsprite_45: 384242165
+      jumpkingsprite_46: 1358307543
+      jumpkingsprite_47: -712527992
+      jumpkingsprite_48: 1929110524
+      jumpkingsprite_49: 1468520407
+      jumpkingsprite_5: 1685787691
+      jumpkingsprite_50: 1377930589
+      jumpkingsprite_51: 976455606
+      jumpkingsprite_52: -159104138
+      jumpkingsprite_53: -1764024921
+      jumpkingsprite_54: 685605636
+      jumpkingsprite_55: -1849920377
+      jumpkingsprite_56: 1450573275
+      jumpkingsprite_57: -233691725
+      jumpkingsprite_58: -1486237627
+      jumpkingsprite_59: 538692578
+      jumpkingsprite_6: 1725066220
+      jumpkingsprite_60: 1528850927
+      jumpkingsprite_61: -1141168020
+      jumpkingsprite_62: 1470257508
+      jumpkingsprite_63: 1206167467
+      jumpkingsprite_64: -887217012
+      jumpkingsprite_65: -1786765255
+      jumpkingsprite_66: -271834573
+      jumpkingsprite_67: -983183358
+      jumpkingsprite_68: 663211196
+      jumpkingsprite_69: -1100271946
+      jumpkingsprite_7: -1005427385
+      jumpkingsprite_70: -366339813
+      jumpkingsprite_71: -1886535194
+      jumpkingsprite_72: 1827609327
+      jumpkingsprite_8: 1599145675
+      jumpkingsprite_9: -1735409618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
