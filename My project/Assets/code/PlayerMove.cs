@@ -8,12 +8,14 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid; //물리이동을 위한 변수 선언 
     SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
     Animator animator; //애니메이터 조작을 위한 변수 
-    public float minJumpForce = 10f;  // 최소 점프 강도
+    public float minJumpForce = 20f;  // 최소 점프 강도
     public float maxJumpForce = 30f; // 최대 점프 강도
     public float chargeTime = 2f;    // 최대 차징 시간
     private float currentChargeTime = 0f;  // 현재 차징된 시간
     private bool isCharging = false;       // 점프 버튼이 눌린 상태인지 확인
     private bool isJumping = false; 
+    private bool canWalk = true;
+    private bool isDown = false; 
 
     private void Awake() {
         
@@ -26,6 +28,7 @@ public class PlayerMove : MonoBehaviour
     void Update(){
         // 버튼에서 손을 떄는 등의 단발적인 키보드 입력은 FixedUpdate보다 Update에 쓰는게 키보드 입력이 누락될 확률이 낮아짐
 
+        if(canWalk){
         //Stop speed 
         if(Input.GetButtonUp("Horizontal")){ // 버튼에서 손을 때는 경우 
             // normalized : 벡터 크기를 1로 만든 상태 (단위벡터 : 크기가 1인 벡터)
@@ -36,7 +39,7 @@ public class PlayerMove : MonoBehaviour
         //Direction Sprite
         if(Input.GetButtonDown("Horizontal"))
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
-
+        }
         
         //Animation
         if( Mathf.Abs(rigid.velocity.x) < 0.2) //속도가 0 == 멈춤 
@@ -64,7 +67,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float h = Input.GetAxisRaw("Horizontal");   
+        float h = canWalk ? Input.GetAxisRaw("Horizontal") : 0f;
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
 
         if(rigid.velocity.x > maxSpeed)  //오른쪽으로 이동 (+) , 최대 속력을 넘으면 
@@ -86,7 +89,31 @@ public class PlayerMove : MonoBehaviour
                 if(rayHit.distance < 0.5f) 
                     animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
                     isJumping = false;
+                    canWalk = true; //점프 후 착지할때 canWalk = true
             }
+        }
+
+        if (isJumping)
+        {
+            // 상승 중 → velocity.y > 0
+            // 하강 중 → velocity.y < 0
+
+            if (rigid.velocity.y < 0 && !isDown)
+            {
+                // 이제 막 하강으로 전환된 경우
+                isDown = true;
+                animator.SetTrigger("Fall");
+            }
+            else if (rigid.velocity.y > 0 && isDown)
+            {
+                // 다시 상승 중으로 돌아갔으면(이 상황은 드물지만) isDown 해제
+                isDown = false;
+            }
+        }
+        else
+        {
+            // 바닥에 있거나 점프 전 상태면 하강이 아님
+            isDown = false;
         }
     }
 
@@ -95,6 +122,7 @@ public class PlayerMove : MonoBehaviour
         isCharging = true;
         animator.SetBool("isCharging", true);
         currentChargeTime = 0f; // 차징 시간 초기화
+        canWalk = false;
     }
 
     void ChargeJump()
@@ -126,6 +154,8 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isCharging", false);
 
             isJumping = true; // 점프 상태로 설정
+
+            canWalk = true;
         }
     }
 }
