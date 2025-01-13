@@ -5,10 +5,15 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed; //최대 속력 변수 
-    public float jumpPower;
     Rigidbody2D rigid; //물리이동을 위한 변수 선언 
     SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
     Animator animator; //애니메이터 조작을 위한 변수 
+    public float minJumpForce = 10f;  // 최소 점프 강도
+    public float maxJumpForce = 30f; // 최대 점프 강도
+    public float chargeTime = 2f;    // 최대 차징 시간
+    private float currentChargeTime = 0f;  // 현재 차징된 시간
+    private bool isCharging = false;       // 점프 버튼이 눌린 상태인지 확인
+    private bool isJumping = false; 
 
     private void Awake() {
         
@@ -19,15 +24,7 @@ public class PlayerMove : MonoBehaviour
 
 
     void Update(){
-
         // 버튼에서 손을 떄는 등의 단발적인 키보드 입력은 FixedUpdate보다 Update에 쓰는게 키보드 입력이 누락될 확률이 낮아짐
-
-
-        //Jump
-        if(Input.GetButtonDown("Jump") && !animator.GetBool("isJumping")){
-            rigid.AddForce(Vector2.up* jumpPower , ForceMode2D.Impulse);
-            animator.SetBool("isJumping",true);
-        }
 
         //Stop speed 
         if(Input.GetButtonUp("Horizontal")){ // 버튼에서 손을 때는 경우 
@@ -46,6 +43,22 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isWalking",false); //isWalking 변수 : false 
         else// 이동중 
             animator.SetBool("isWalking",true);
+
+        // 점프 버튼 입력 처리 (기본적으로 스페이스바 사용)
+        if (Input.GetKeyDown(KeyCode.Space) && !(isJumping))
+        {
+            StartCharging();
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ChargeJump();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            PerformJump();
+        }
     }
 
     // Update is called once per frame
@@ -72,8 +85,47 @@ public class PlayerMove : MonoBehaviour
             if(rayHit.collider != null){ //빔을 맞은 오브젝트가 있을때  -> 맞지않으면 collider도 생성되지않음 
                 if(rayHit.distance < 0.5f) 
                     animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
-
+                    isJumping = false;
             }
+        }
+    }
+
+    void StartCharging()
+    {
+        isCharging = true;
+        animator.SetBool("isCharging", true);
+        currentChargeTime = 0f; // 차징 시간 초기화
+    }
+
+    void ChargeJump()
+    {
+        if (isCharging)
+        {
+        // 차징 시간을 증가시키되, 최대 차징 시간을 넘지 않게 제한
+        currentChargeTime += Time.deltaTime;
+        currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, chargeTime);
+        }
+    }
+
+    void PerformJump()
+    {
+        if (isCharging)
+        {
+            // 차징 비율 계산 (0~1 사이 값)
+            float chargeRatio = currentChargeTime / chargeTime;
+
+            // 점프 강도 계산
+            float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeRatio);
+
+            // Rigidbody2D에 점프 힘 추가
+            rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
+
+            // 차징 종료
+            isCharging = false;
+            currentChargeTime = 0f;
+            animator.SetBool("isCharging", false);
+
+            isJumping = true; // 점프 상태로 설정
         }
     }
 }
