@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid; //물리이동을 위한 변수 선언 
     SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
     Animator animator; //애니메이터 조작을 위한 변수 
+    BoxCollider2D boxCol;
     public float minJumpForce = 20f;  // 최소 점프 강도
     public float maxJumpForce = 30f; // 최대 점프 강도
     public float chargeTime = 2f;    // 최대 차징 시간
@@ -24,8 +26,9 @@ public class PlayerMove : MonoBehaviour
     private void Awake() {
         
         rigid = GetComponent<Rigidbody2D>(); //변수 초기화 
-        spriteRenderer = GetComponent<SpriteRenderer>(); // 초기화 
+        spriteRenderer = GetComponent<SpriteRenderer>(); 
         animator = GetComponent<Animator>();
+        boxCol = GetComponent<BoxCollider2D>();
     }
 
 
@@ -85,18 +88,10 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity =  new Vector2(maxSpeed*(-1), rigid.velocity.y); //y값은 점프의 영향이므로 0으로 제한을 두면 안됨 
 
 
-        //Landing Paltform
-        Debug.DrawRay(rigid.position, Vector3.down, new Color(0,1,0)); //빔을 쏨(디버그는 게임상에서보이지 않음 ) 시작위치, 어디로 쏠지, 빔의 색 
-
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
-        //빔의 시작위치, 빔의 방향 , 1:distance , ( 빔에 맞은 오브젝트를 특정 레이어로 한정 지어야할 때 사용 ) // RaycastHit2D : Ray에 닿은 오브젝트 클래스 
-    
-        //rayHit는 여러개 맞더라도 처음 맞은 오브젝트의 정보만을 저장(?) 
-        if(rigid.velocity.y < 0){ // 뛰어올랐다가 아래로 떨어질 때만 빔을 쏨 
-            if(rayHit.collider != null){ //빔을 맞은 오브젝트가 있을때  -> 맞지않으면 collider도 생성되지않음 
-                if(rayHit.distance < 0.5f) 
-                {
-                    animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
+        bool onGround = CheckGround_BoxCast();
+        if(onGround)
+        {
+            animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
                     isJumping = false;
                     if (isFall)
                     {
@@ -109,8 +104,6 @@ public class PlayerMove : MonoBehaviour
                     {
                         canWalk = true;
                     }
-                }
-            }
         }
 
         if (isJumping)
@@ -152,6 +145,31 @@ public class PlayerMove : MonoBehaviour
             isDown = false;
             animator.SetBool("isFall", false);
         }
+    }
+
+    bool CheckGround_BoxCast()
+    {
+    BoxCollider2D boxCol = GetComponent<BoxCollider2D>();
+    if (boxCol == null) return false;
+
+    Bounds bounds = boxCol.bounds;
+
+    // 조금 축소한 박스 크기
+    Vector2 boxSize   = bounds.size * 0.9f;
+    Vector2 boxCenter = bounds.center;
+    float boxAngle    = 0f; 
+    Vector2 castDir   = Vector2.down; 
+    float castDist    = 0.2f; // 발 아래 짧은 거리까지만 캐스팅
+    int   layerMask   = LayerMask.GetMask("Platform");
+
+    // BoxCast
+    RaycastHit2D hit = Physics2D.BoxCast(boxCenter, boxSize, boxAngle, castDir, castDist, layerMask);
+
+    // 디버그용
+    Debug.DrawRay(boxCenter, castDir * castDist, Color.red);
+
+    // hit.collider가 null이 아니면 바닥
+    return (hit.collider != null);
     }
 
     // 기절(Stun) 상태를 2초 동안 유지하는 코루틴
