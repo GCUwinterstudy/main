@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -9,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid; //물리이동을 위한 변수 선언 
     SpriteRenderer spriteRenderer; //방향전환을 위한 변수 
     Animator animator; //애니메이터 조작을 위한 변수 
-    BoxCollider2D boxCol;
+    BoxCollider2D col2D;
     public float minJumpForce = 20f;  // 최소 점프 강도
     public float maxJumpForce = 30f; // 최대 점프 강도
     public float chargeTime = 2f;    // 최대 차징 시간
@@ -22,13 +21,14 @@ public class PlayerMove : MonoBehaviour
     private bool isStun = false;
     private float fallTimer = 0f; // 하강 시간 누적용
     public float fallThreshold = 3f; // 몇 초 이상이면 isFall로 판정할지
+    
 
     private void Awake() {
         
         rigid = GetComponent<Rigidbody2D>(); //변수 초기화 
         spriteRenderer = GetComponent<SpriteRenderer>(); 
         animator = GetComponent<Animator>();
-        boxCol = GetComponent<BoxCollider2D>();
+        col2D = GetComponent<BoxCollider2D>();
     }
 
 
@@ -55,73 +55,65 @@ public class PlayerMove : MonoBehaviour
             if(!isJumping) 
                 animator.SetBool("isWalking",true);
 
+        bool isGround = IsGrounded();
         // 점프 버튼 입력 처리 (기본적으로 스페이스바 사용)
-        if (Input.GetKeyDown(KeyCode.Space) && !(isJumping) && !(isStun))
+        if (Input.GetKeyDown(KeyCode.Space) && !(isJumping) && !(isStun) && isGround)
         {
             StartCharging();
         }
 
-        if (Input.GetKey(KeyCode.Space) && !(isStun))
+        if (Input.GetKey(KeyCode.Space) && !(isStun) && isGround)
         {
             ChargeJump();
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && !(isStun))
+        if (Input.GetKeyUp(KeyCode.Space) && !(isStun) && isGround)
         {
             PerformJump();
         }
 
-        Debug.Log(canWalk);
-        //Debug.Log(rigid.velocity.x);
+        Debug.Log("isDown : "+isDown);
+        Debug.Log("isGround : "+isGround);
+        Debug.Log("isJumping : "+isJumping);
+        //Debug.Log("y : "+rigid.velocity.y);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        bool isGround = IsGrounded();
         float h = canWalk ? Input.GetAxisRaw("Horizontal") : 0f;
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
         
-
         if(rigid.velocity.x > maxSpeed)  //오른쪽으로 이동 (+) , 최대 속력을 넘으면 
             rigid.velocity= new Vector2(maxSpeed, rigid.velocity.y); //해당 오브젝트의 속력은 maxSpeed 
         else if(rigid.velocity.x < maxSpeed*(-1)) // 왼쪽으로 이동 (-) 
             rigid.velocity =  new Vector2(maxSpeed*(-1), rigid.velocity.y); //y값은 점프의 영향이므로 0으로 제한을 두면 안됨 
 
-
-        bool onGround = CheckGround_BoxCast();
-        if(onGround)
-        {
-            animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
-                    isJumping = false;
-                    if (isFall)
-                    {
-                        // 추락 종료 → 기절 시작
-                        StartCoroutine(StunRoutine(2f)); // 2초 동안 기절
-                        isFall = false; // isFall도 해제
-                    }
-
-                    if(!isStun)
-                    {
-                        canWalk = true;
-                    }
+        if(isGround){
+        animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
+        isJumping = false;
+            if (isFall)
+            {
+                // 추락 종료 → 기절 시작
+                StartCoroutine(StunRoutine(2f)); // 2초 동안 기절
+                isFall = false; // isFall도 해제
+            }
+            if(!isJumping && !isCharging && !isDown){
+                canWalk = true;
+            }
+        }else{
+            canWalk = false;
         }
 
         if (isJumping)
         {
-            // 상승 중 → velocity.y > 0
             // 하강 중 → velocity.y < 0
-
             if (rigid.velocity.y < 0 && !isDown)
             {
-                // 이제 막 하강으로 전환된 경우
                 isDown = true;
                 animator.SetTrigger("isDown");
             }
-        }
-        else
-        {
-            // 바닥에 있거나 점프 전 상태면 하강이 아님
-            isDown = false;
         }
 
         // ---- (추가) 하강 시간(fallTimer) 로직 ----
@@ -145,31 +137,6 @@ public class PlayerMove : MonoBehaviour
             isDown = false;
             animator.SetBool("isFall", false);
         }
-    }
-
-    bool CheckGround_BoxCast()
-    {
-    BoxCollider2D boxCol = GetComponent<BoxCollider2D>();
-    if (boxCol == null) return false;
-
-    Bounds bounds = boxCol.bounds;
-
-    // 조금 축소한 박스 크기
-    Vector2 boxSize   = bounds.size * 0.9f;
-    Vector2 boxCenter = bounds.center;
-    float boxAngle    = 0f; 
-    Vector2 castDir   = Vector2.down; 
-    float castDist    = 0.2f; // 발 아래 짧은 거리까지만 캐스팅
-    int   layerMask   = LayerMask.GetMask("Platform");
-
-    // BoxCast
-    RaycastHit2D hit = Physics2D.BoxCast(boxCenter, boxSize, boxAngle, castDir, castDist, layerMask);
-
-    // 디버그용
-    Debug.DrawRay(boxCenter, castDir * castDist, Color.red);
-
-    // hit.collider가 null이 아니면 바닥
-    return (hit.collider != null);
     }
 
     // 기절(Stun) 상태를 2초 동안 유지하는 코루틴
@@ -240,5 +207,32 @@ public class PlayerMove : MonoBehaviour
 
             isJumping = true; // 점프 상태로 설정
         }
+    }
+
+    bool IsGrounded()
+    {
+    // BoxCast로 기본 바닥 감지
+    RaycastHit2D rayHit = Physics2D.BoxCast(
+        col2D.bounds.center,
+        col2D.bounds.size * 0.9f,  // 크기 보정
+        0f,
+        Vector2.down,
+        0.2f,                      // 거리 늘림
+        LayerMask.GetMask("Platform")
+    );
+
+    // Raycast 추가 보조 감지
+    RaycastHit2D rayHit2 = Physics2D.Raycast(
+        col2D.bounds.center,
+        Vector2.down,
+        0.2f,
+        LayerMask.GetMask("Platform")
+    );
+
+    // 디버깅용 시각화
+    Debug.DrawRay(col2D.bounds.center, Vector2.down * 0.2f, Color.red);
+
+    // BoxCast 또는 Raycast 중 하나라도 감지되면 바닥에 있다고 판단
+    return (rayHit.collider != null || rayHit2.collider != null);
     }
 }

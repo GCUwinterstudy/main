@@ -367,7 +367,7 @@ Transform:
   m_GameObject: {fileID: 1148356262}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.07, y: -2.42, z: 0}
+  m_LocalPosition: {x: -4.07, y: -3.87, z: 0}
   m_LocalScale: {x: 4.2203126, y: 0.7625, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -582,6 +582,22 @@ PrefabInstance:
     - target: {fileID: 1596405228486957739, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061832970010732348, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+      propertyPath: maxJumpForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739960444474883793, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+      propertyPath: m_Size.y
+      value: 0.904712
+      objectReference: {fileID: 0}
+    - target: {fileID: 5739960444474883793, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.019022673
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886713902357239877, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
