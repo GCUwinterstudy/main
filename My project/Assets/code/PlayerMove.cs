@@ -93,6 +93,7 @@ public class PlayerMove : MonoBehaviour
         if(isGround){
         animator.SetBool("isJumping",false); //거리가 0.5보다 작아지면 변경
         isJumping = false;
+        isDown = false;
             if (isFall)
             {
                 // 추락 종료 → 기절 시작
@@ -106,15 +107,13 @@ public class PlayerMove : MonoBehaviour
             canWalk = false;
         }
 
-        if (isJumping)
-        {
             // 하강 중 → velocity.y < 0
             if (rigid.velocity.y < 0 && !isDown)
             {
                 isDown = true;
                 animator.SetTrigger("isDown");
             }
-        }
+        
 
         // ---- (추가) 하강 시간(fallTimer) 로직 ----
         if (isDown)
