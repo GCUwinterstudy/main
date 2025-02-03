@@ -68,6 +68,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private int multiple = 0;
     private RoomInfo selectedRoom = null;
 
+    public static bool isReturningToMainMenu = false;
+
 
     #region UNITY_CALLBACKS
     private void Awake() {
@@ -114,31 +116,57 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    // private void Start()
-    // {
-    //     // Start에서 이벤트 구독
-    //     SceneManager.sceneLoaded += OnSceneLoaded;
+    private void Start()
+    {
+        // Start에서 이벤트 구독
+        SceneManager.sceneLoaded += OnSceneLoaded;
         
-    //     // 초기 UI 상태 설정 등 기존 Start() 로직
-    // }
+        // 초기 UI 상태 설정 등 기존 Start() 로직
+    }
 
-    // private void OnDestroy()
-    // {
-    //     // OnDestroy에서 이벤트 해제
-    //     SceneManager.sceneLoaded -= OnSceneLoaded;
-    // }
+    private void OnDestroy()
+    {
+        // OnDestroy에서 이벤트 해제
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
 
-    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    // {
-    //     if (scene.name == "MainMenu")
-    //     {
-    //         if (MenuPanel != null) MenuPanel.SetActive(true);
-    //         if (LobbyPanel != null) LobbyPanel.SetActive(false);
-    //         if (CreatePanel != null) CreatePanel.SetActive(false);
-    //         if (JoinMenu != null) JoinMenu.SetActive(false);
-    //         if (RoomPanel != null) RoomPanel.SetActive(false);
-    //     }
-    // }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+{
+    if (scene.name == "MainMenu")
+    {
+        Debug.Log("OnSceneLoaded: MainMenu 씬이 로드되었습니다. 패널 상태 초기화 진행");
+
+        if (MenuPanel != null) {
+            MenuPanel.SetActive(true);
+            Debug.Log("MenuPanel 활성화");
+        } else {
+            Debug.LogWarning("MenuPanel 참조가 없습니다.");
+        }
+
+        if (LobbyPanel != null) {
+            LobbyPanel.SetActive(false);
+            Debug.Log("LobbyPanel 비활성화");
+        } else {
+            Debug.LogWarning("LobbyPanel 참조가 없습니다.");
+        }
+
+        if (CreatePanel != null) {
+            CreatePanel.SetActive(false);
+            Debug.Log("CreatePanel 비활성화");
+        }
+
+        if (JoinMenu != null) {
+            JoinMenu.SetActive(false);
+            Debug.Log("JoinMenu 비활성화");
+        }
+
+        if (RoomPanel != null) {
+            RoomPanel.SetActive(false);
+            Debug.Log("RoomPanel 비활성화");
+        }
+    }
+}
 
 
     #region MENU_PANEL
@@ -173,15 +201,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public override void OnDisconnected(DisconnectCause cause) {
-        MenuPanel.SetActive(true);
-        LobbyPanel.SetActive(false);
-        CreatePanel.SetActive(false);
-        JoinMenu.SetActive(false);
-        RoomPanel.SetActive(false);
+    // 만약 NetworkManager가 파괴되어 UI 참조가 null이라면 바로 리턴
+    if (MenuPanel == null) return;
 
-        roomList.Clear();
-        selectedRoom = null;
-    }
+    MenuPanel.SetActive(true);
+    LobbyPanel.SetActive(false);
+    CreatePanel.SetActive(false);
+    JoinMenu.SetActive(false);
+    RoomPanel.SetActive(false);
+
+    roomList.Clear();
+    selectedRoom = null;
+}
 
     public override void OnRoomListUpdate(List<RoomInfo> updatedList) {
         foreach (RoomInfo info in updatedList) {
@@ -455,10 +486,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public override void OnLeftRoom() {
-            LobbyPanel.SetActive(true);
-            RoomPanel.SetActive(false);
-            PhotonNetwork.LocalPlayer.NickName = "";
+    // 메인 메뉴로 돌아가는 상황이라면 MainMenu UI만 보이도록 설정합니다.
+    if (isReturningToMainMenu)
+    {
+        if (MenuPanel != null) MenuPanel.SetActive(true);
+        if (LobbyPanel != null) LobbyPanel.SetActive(false);
+        if (CreatePanel != null) CreatePanel.SetActive(false);
+        if (JoinMenu != null) JoinMenu.SetActive(false);
+        if (RoomPanel != null) RoomPanel.SetActive(false);
+        // 플래그는 사용 후 리셋합니다.
+        isReturningToMainMenu = false;
     }
+    else
+    {
+        // 그 외의 상황(예, 일반적으로 로비로 돌아갈 때)
+        if (LobbyPanel != null) LobbyPanel.SetActive(true);
+        if (RoomPanel != null) RoomPanel.SetActive(false);
+    }
+    PhotonNetwork.LocalPlayer.NickName = "";
+}
 
     private void GameProceed() {
         if (!PhotonNetwork.IsMasterClient) {
@@ -489,7 +535,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 return;
         }
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
 
         PhotonNetwork.LoadLevel(sceneToLoad);
         

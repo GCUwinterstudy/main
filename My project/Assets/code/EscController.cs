@@ -89,17 +89,21 @@ public class EscController : MonoBehaviourPunCallbacks
 
     public void ReturnToMainMenu()
     {
-        isPaused = false;
-        // 옵션 패널이 켜져 있다면 먼저 꺼줍니다.
-        if (optionsPanel != null) {
-            optionsPanel.SetActive(false);
-        }
-        PhotonNetwork.LeaveRoom();
+    isPaused = false;
+    
+    if (optionsPanel != null) {
+        optionsPanel.SetActive(false);
+        Debug.Log("ReturnToMainMenu: OptionsPanel 비활성화");
+    }
+    
+    Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
+    PhotonNetwork.LeaveRoom();
+    PhotonNetwork.Disconnect();
     }
 
     public override void OnLeftRoom()
     {
-        // MainMenu 씬으로 전환
+        Debug.Log("OnLeftRoom: 방 탈퇴 완료. MainMenu 씬 로드");
         SceneManager.LoadScene("MainMenu");
     }
 
