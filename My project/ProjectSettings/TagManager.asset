@@ -6,6 +6,7 @@ TagManager:
   tags:
   - portal
   - block_static
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - UI
   - Platform
   - Player
-  - 
+  - Princess
   - 
   - 
   - 
