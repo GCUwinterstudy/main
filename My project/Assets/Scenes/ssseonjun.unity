@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 247487794}
   - component: {fileID: 247487793}
   - component: {fileID: 247487795}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bounce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4111,7 +4111,7 @@ GameObject:
   - component: {fileID: 1365361068}
   - component: {fileID: 1365361067}
   - component: {fileID: 1365361069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: static
   m_TagString: block_static
   m_Icon: {fileID: 0}
@@ -14227,7 +14227,7 @@ GameObject:
   - component: {fileID: 2092450508}
   - component: {fileID: 2092450507}
   - component: {fileID: 2092450509}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
