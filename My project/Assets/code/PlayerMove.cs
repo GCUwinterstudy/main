@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviourPunCallbacks
 {
     public float maxSpeed; // 최대 속력 변수 
     Rigidbody2D rigid;         // 물리 이동을 위한 변수 
@@ -33,6 +35,11 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine) {
+            return;
+        }
+
+
         // 키 입력은 Update에서 처리 (canWalk와 isStun 상태를 먼저 체크)
         if (canWalk && !isStun)
         {
@@ -80,6 +87,10 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!photonView.IsMine) {
+            return;
+        }
+
         bool isGround = IsGrounded();
         float h = canWalk ? Input.GetAxisRaw("Horizontal") : 0f;
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
