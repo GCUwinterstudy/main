@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 using ExitGames.Client.Photon;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 
 public class NetworkManager : MonoBehaviourPunCallbacks
@@ -73,10 +74,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Screen.SetResolution(1920, 1080, false);
 
         MenuPanel.SetActive(true);
-        LobbyPanel.SetActive(false);
         CreatePanel.SetActive(false);
         JoinMenu.SetActive(false);
         RoomPanel.SetActive(false);
+        LobbyPanel.SetActive(false);
 
         //SingleplayButton.onClick.AddListener(onClickSingleplay);
         MultiplayButton.onClick.AddListener(onClickMultiplay);
@@ -98,9 +99,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         BackLobbyButton3.onClick.AddListener(LeaveRoom);
         GameProceedButton.onClick.AddListener(GameProceed);
 
-        for (int i=0; i< CellBtn.Length; i++) {
+        for (int i = 0; i < CellBtn.Length; i++) {
             int index = i;
-            CellBtn[i].onClick.AddListener(() => OnRoomCellClick(index));
+            if (CellBtn[i] != null)
+                CellBtn[i].onClick.AddListener(() => OnRoomCellClick(index));
         }
 
         PreviousCellBtn.onClick.AddListener(OnClickPreviousPage);
@@ -112,6 +114,31 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
+    // private void Start()
+    // {
+    //     // Start에서 이벤트 구독
+    //     SceneManager.sceneLoaded += OnSceneLoaded;
+        
+    //     // 초기 UI 상태 설정 등 기존 Start() 로직
+    // }
+
+    // private void OnDestroy()
+    // {
+    //     // OnDestroy에서 이벤트 해제
+    //     SceneManager.sceneLoaded -= OnSceneLoaded;
+    // }
+
+    // private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    // {
+    //     if (scene.name == "MainMenu")
+    //     {
+    //         if (MenuPanel != null) MenuPanel.SetActive(true);
+    //         if (LobbyPanel != null) LobbyPanel.SetActive(false);
+    //         if (CreatePanel != null) CreatePanel.SetActive(false);
+    //         if (JoinMenu != null) JoinMenu.SetActive(false);
+    //         if (RoomPanel != null) RoomPanel.SetActive(false);
+    //     }
+    // }
 
 
     #region MENU_PANEL
@@ -455,14 +482,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         string sceneToLoad = "";
         switch (map) {
             case "Original":
-                sceneToLoad = "OriginalScene";
+                sceneToLoad = "SampleScene";
                 break;
             default:
                 CancelRoom();
                 return;
         }
 
+        //Destroy(gameObject);
+
         PhotonNetwork.LoadLevel(sceneToLoad);
+        
     }
 
     private void CancelRoom() {
