@@ -22,6 +22,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private bool isDown = false;
     private bool isFall = false;
     private bool isStun = false;
+    private bool isFlip = false;
     private float fallTimer = 0f;     // 하강 시간 누적용
     public float fallThreshold = 3f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
 
@@ -50,9 +51,21 @@ public class PlayerMove : MonoBehaviourPunCallbacks
                 rigid.velocity = new Vector2(0.5f * rigid.velocity.normalized.x, rigid.velocity.y);
             }
 
-            // 좌우 입력에 따른 스프라이트 방향 전환
+            // 좌우 입력에 따른 스프라이트 방향 전환 및 isFlip변화
             if (Input.GetButtonDown("Horizontal"))
-                spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
+            {
+                float hInput = Input.GetAxisRaw("Horizontal");
+                if (hInput < 0) //좌측이동시 true
+                {
+                    spriteRenderer.flipX = true;
+                    isFlip = true;
+                }
+                else if (hInput > 0) //우측이동시 false
+                {
+                    spriteRenderer.flipX = false;
+                    isFlip = false;
+                }
+            }
         }
 
         // 걷기 애니메이션 처리
@@ -83,6 +96,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         // Debug.Log("isDown : " + isDown);
         // Debug.Log("isGround : " + isGround);
         // Debug.Log("isJumping : " + isJumping);
+        Debug.Log("isFlip : " + isFlip);
     }
 
     void FixedUpdate()
@@ -146,6 +160,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             fallTimer = 0f;
             isFall = false;
             isDown = false;
+            animator.SetBool("isDown", false);
             animator.SetBool("isFall", false);
         }
     }
