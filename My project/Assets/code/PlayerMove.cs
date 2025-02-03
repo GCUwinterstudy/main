@@ -242,7 +242,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             col2D.bounds.size * 0.9f, // 크기 보정
             0f,
             Vector2.down,
-            0.2f,                    // 감지 거리
+            1.0f,                    // 감지 거리
             LayerMask.GetMask("Platform")
         );
 
