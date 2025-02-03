@@ -59,11 +59,13 @@ public class PlayerMove : MonoBehaviourPunCallbacks
                 {
                     spriteRenderer.flipX = true;
                     isFlip = true;
+                    animator.SetBool("isFall", true);
                 }
                 else if (hInput > 0) //우측이동시 false
                 {
                     spriteRenderer.flipX = false;
                     isFlip = false;
+                    animator.SetBool("isFall", false);
                 }
             }
         }
