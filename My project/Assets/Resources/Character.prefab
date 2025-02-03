@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 5855995849297929179}
   - component: {fileID: -4474369501343655333}
   - component: {fileID: 5727230941516496690}
-  m_Layer: 0
+  - component: {fileID: -8183477895105322074}
+  m_Layer: 7
   m_Name: Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,6 +221,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5727230941516496690}
+  - {fileID: -8183477895105322074}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -239,3 +241,39 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &-8183477895105322074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596405228486957739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 0
+    Name: isWalking
+  - Type: 4
+    SynchronizeType: 0
+    Name: isJumping
+  - Type: 4
+    SynchronizeType: 0
+    Name: isCharging
+  - Type: 4
+    SynchronizeType: 0
+    Name: isDown
+  - Type: 4
+    SynchronizeType: 0
+    Name: isFall
+  - Type: 4
+    SynchronizeType: 0
+    Name: isStun
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
