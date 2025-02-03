@@ -105,7 +105,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         PreviousCellBtn.onClick.AddListener(OnClickPreviousPage);
         NextCellBtn.onClick.AddListener(OnClickNextPage);
+
         PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.SendRate = 60;
+        PhotonNetwork.SerializationRate = 30;
     }
     #endregion
 
