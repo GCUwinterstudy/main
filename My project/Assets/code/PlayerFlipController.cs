@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerFlipController : MonoBehaviourPun
+public class PlayerFlipController : MonoBehaviourPunCallbacks
 {
     private Animator animator;
-    private SpriteRenderer sr;
+    private SpriteRenderer spriteRenderer;
 
-    private void Awake() {
+    private void Awake()
+    {
         animator = GetComponent<Animator>();
-        sr = GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (!photonView.IsMine)
+        // 로컬 플레이어의 경우 PlayerMove에서 flip을 직접 처리하므로 건너뜁니다.
+        if (photonView.IsMine)
             return;
 
-        // 예: 왼쪽 이동 입력 시 Flip을 true, 오른쪽 이동 시 false로 설정
-        bool shouldFlip = Input.GetAxisRaw("Horizontal") < 0;
-        animator.SetBool("Flip", shouldFlip);
-
-        // 로컬에서는 Animator의 파라미터에 따라 SpriteRenderer의 flipX를 업데이트
-        sr.flipX = animator.GetBool("Flip");
+        // 원격 플레이어의 경우, Animator에서 동기화된 "isFlip" 값을 읽어 flipX 적용
+        bool flip = animator.GetBool("isFlip");
+        spriteRenderer.flipX = flip;
     }
 }

@@ -22,7 +22,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private bool isDown = false;
     private bool isFall = false;
     private bool isStun = false;
-    private bool isFlip = false;
     private float fallTimer = 0f;     // 하강 시간 누적용
     public float fallThreshold = 3f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
 
@@ -58,13 +57,11 @@ public class PlayerMove : MonoBehaviourPunCallbacks
                 if (hInput < 0) //좌측이동시 true
                 {
                     spriteRenderer.flipX = true;
-                    isFlip = true;
                     animator.SetBool("isFlip", true);
                 }
                 else if (hInput > 0) //우측이동시 false
                 {
                     spriteRenderer.flipX = false;
-                    isFlip = false;
                     animator.SetBool("isFlip", false);
                 }
             }
@@ -98,7 +95,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         // Debug.Log("isDown : " + isDown);
         // Debug.Log("isGround : " + isGround);
         // Debug.Log("isJumping : " + isJumping);
-        Debug.Log("isFlip : " + isFlip);
+        // Debug.Log("isFlip : " + isFlip);
     }
 
     void FixedUpdate()
