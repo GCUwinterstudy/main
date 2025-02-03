@@ -257,22 +257,22 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isWalking
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isJumping
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isCharging
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isDown
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isFall
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: isStun
   m_SynchronizeLayers:
   - SynchronizeType: 0
