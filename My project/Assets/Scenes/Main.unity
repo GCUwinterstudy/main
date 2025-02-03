@@ -123,6 +123,35 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &479659631 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1596405228486957739, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+  m_PrefabInstance: {fileID: 9138779103687764124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &479659638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479659631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2e9b803f4103e4ca03fd79eb9ca664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  maxSpeed: 6
+  rigid: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  animator: {fileID: 0}
+  col2D: {fileID: 0}
+  minJumpForce: 10
+  maxJumpForce: 30
+  chargeTime: 1
+  currentChargeTime: 0
+  fallTimer: 0
+  fallThreshold: 0.9
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,6 +613,10 @@ PrefabInstance:
       value: Character
       objectReference: {fileID: 0}
     - target: {fileID: 4061832970010732348, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061832970010732348, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
       propertyPath: maxJumpForce
       value: 20
       objectReference: {fileID: 0}
@@ -602,7 +635,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1596405228486957739, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
+      insertIndex: 5
+      addedObject: {fileID: 479659638}
   m_SourcePrefab: {fileID: 100100000, guid: cbc92dd8565bc884697dbc6cc8d3dedb, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
