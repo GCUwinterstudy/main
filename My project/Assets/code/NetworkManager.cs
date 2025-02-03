@@ -105,6 +105,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         PreviousCellBtn.onClick.AddListener(OnClickPreviousPage);
         NextCellBtn.onClick.AddListener(OnClickNextPage);
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
     #endregion
 
@@ -415,6 +416,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             }
         }
 
+        GameProceedButton.interactable = PhotonNetwork.IsMasterClient;
+
     }
 
     private void LeaveRoom() {
@@ -428,11 +431,47 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     private void GameProceed() {
-        if (PhotonNetwork.IsMasterClient) {
-            PhotonNetwork.LoadLevel("GameScene");
+        if (!PhotonNetwork.IsMasterClient) {
+            Debug.LogWarning("게임 시작은 방장만 할 수 있습니다.");
+            return;
         }
+
+        if (!PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("map")) {
+            Debug.LogWarning("맵 정보가 없습니다.");
+            CancelRoom();
+            return;
+        }
+
+        string map = PhotonNetwork.CurrentRoom.CustomProperties["map"].ToString();
+        if (string.IsNullOrEmpty(map)) {
+            Debug.LogWarning("맵 정보가 없습니다.");
+            CancelRoom();
+            return;
+        }
+
+        string sceneToLoad = "";
+        switch (map) {
+            case "Original":
+                sceneToLoad = "OriginalScene";
+                break;
+            default:
+                CancelRoom();
+                return;
+        }
+
+        PhotonNetwork.LoadLevel(sceneToLoad);
+    }
+
+    private void CancelRoom() {
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+
+        PV.RPC("ChatRPC", RpcTarget.All, "<color=red>맵 정보가 유효하지 않아 게임을 시작할 수 없습니다. 메인 화면으로 이동합니다.</color>");
+        
+        PhotonNetwork.LeaveRoom();
     }
     #endregion
+
+
 
 
     #region CHAT_LOGIC
