@@ -780,11 +780,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 289914422010062133, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.9567966
+      value: -2.32
       objectReference: {fileID: 0}
     - target: {fileID: 289914422010062133, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 43.454643
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 289914422010062133, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -824,7 +824,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 289914422010062133, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 519420032}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
 --- !u!1 &196537571
@@ -2178,6 +2181,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!4 &426693015 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 289914422010062133, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
+  m_PrefabInstance: {fileID: 123316228}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -2263,12 +2271,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.32, y: -0.38, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 426693015}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &539466394
 GameObject:
@@ -14561,8 +14569,8 @@ Transform:
   m_GameObject: {fileID: 1878975484}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0157, y: 41, z: 0}
-  m_LocalScale: {x: 1.103334, y: 10, z: 1}
+  m_LocalPosition: {x: -1.2579, y: 39.2718, z: 0}
+  m_LocalScale: {x: 2.1227152, y: 12.159892, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -14679,19 +14687,33 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
+  - first: {x: 6, y: 17, z: 0}
+    second:
+      serializedVersion: 2
+      m_TileIndex: 2
+      m_TileSpriteIndex: 2
+      m_TileMatrixIndex: 0
+      m_TileColorIndex: 0
+      m_TileObjectToInstantiateIndex: 65535
+      dummyAlignment: 0
+      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: fb2fd67bb9b7ab64eb34907d839c5c75, type: 2}
+  - m_RefCount: 1
+    m_Data: {fileID: 11400000, guid: 0bb063cc3aa23564e9a05dee6c932c81, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 3b3e2f48c39f25044bdb376c92f7d805, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 719102406, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: -1703733471, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: -911022537, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
   m_TileMatrixArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data:
       e00: 1
       e01: 0
@@ -14710,13 +14732,13 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2
+  - m_RefCount: 3
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: 0, y: 0, z: 0}
-  m_Size: {x: 6, y: 18, z: 1}
+  m_Size: {x: 7, y: 18, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -15579,7 +15601,6 @@ Tilemap:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 519420032}
   - {fileID: 370850246}
   - {fileID: 1833641212}
   - {fileID: 1878975486}
