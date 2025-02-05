@@ -29,6 +29,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Button CreateButton;
     public Button ReloadButton;
 
+    [Header("OptionPanel")]
+    public GameObject OptionPanel;
+    // OptionPanel 내에서 각 세트별 하위 패널들
+    [Header("Option Sub Panels")]
+    public GameObject AudioSet;       // 오디오 설정 패널
+    public GameObject VideoSet;       // 그래픽(비디오) 설정 패널
+    public GameObject ControllerSet;  // 컨트롤러(키 안내) 설정 패널
+    public GameObject ETCSet;         // 기타 정보(예: 개발자소개, 펀딩 등) 패널
+
+    // OptionPanel 내부 버튼들
+    public Button AudioButton;
+    public Button VideoButton;
+    public Button ControllerButton;
+    public Button ETCButton;
+    public Button OptionBackButton;   // OptionPanel에서 뒤로가기(닫기) 버튼
+    public Button SaveButton;
+
     [Header("CreatePanel")]
     public GameObject CreatePanel;
     public TMP_InputField CreateRoomNameInput;
@@ -80,10 +97,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         JoinMenu.SetActive(false);
         RoomPanel.SetActive(false);
         LobbyPanel.SetActive(false);
+        OptionPanel.SetActive(false);
+        // OptionPanel 하위 세트들도 기본적으로 비활성화
+        if(AudioSet != null) AudioSet.SetActive(false);
+        if(VideoSet != null) VideoSet.SetActive(false);
+        if(ControllerSet != null) ControllerSet.SetActive(false);
+        if(ETCSet != null) ETCSet.SetActive(false);
 
         //SingleplayButton.onClick.AddListener(onClickSingleplay);
         MultiplayButton.onClick.AddListener(onClickMultiplay);
-        //OptionButton.onClick.AddListener(onClickOption);
+        OptionButton.onClick.AddListener(OnClickOption);
         ExitButton.onClick.AddListener(() => Application.Quit());
 
         BackMainButton.onClick.AddListener(BackToMainFromLobby);
@@ -121,7 +144,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         // Start에서 이벤트 구독
         SceneManager.sceneLoaded += OnSceneLoaded;
         
-        // 초기 UI 상태 설정 등 기존 Start() 로직
+        if(AudioButton != null)
+            AudioButton.onClick.AddListener(ShowAudioSet);
+        if(VideoButton != null)
+            VideoButton.onClick.AddListener(ShowVideoSet);
+        if(ControllerButton != null)
+            ControllerButton.onClick.AddListener(ShowControllerSet);
+        if(ETCButton != null)
+            ETCButton.onClick.AddListener(ShowETCSet);
+
+        if(OptionBackButton != null)
+            OptionBackButton.onClick.AddListener(() => { 
+                OptionPanel.SetActive(false);
+                MenuPanel.SetActive(true);
+            });
+
     }
 
     private void OnDestroy()
@@ -165,6 +202,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             RoomPanel.SetActive(false);
             Debug.Log("RoomPanel 비활성화");
         }
+
+        if (OptionPanel != null) {
+                OptionPanel.SetActive(false);
+                Debug.Log("OptionPanel 비활성화");
+        }
     }
 }
 
@@ -181,7 +223,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     private void OnClickOption() {
-        // OptionPanel.SetActive(true);
+        OptionPanel.SetActive(true);
+        MenuPanel.SetActive(false);
+        ShowAudioSet();
     }
     #endregion
 
@@ -209,6 +253,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     CreatePanel.SetActive(false);
     JoinMenu.SetActive(false);
     RoomPanel.SetActive(false);
+    OptionPanel.SetActive(false);
 
     roomList.Clear();
     selectedRoom = null;
@@ -494,6 +539,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (CreatePanel != null) CreatePanel.SetActive(false);
         if (JoinMenu != null) JoinMenu.SetActive(false);
         if (RoomPanel != null) RoomPanel.SetActive(false);
+        if (OptionPanel != null) OptionPanel.SetActive(false);
         // 플래그는 사용 후 리셋합니다.
         isReturningToMainMenu = false;
     }
@@ -580,5 +626,34 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
     #endregion
 
-        
+    #region OPTION_PANEL LOGIC
+    // 각 하위 옵션 세트를 표시하는 메서드들.
+    private void ShowAudioSet() {
+        if (AudioSet != null) AudioSet.SetActive(true);
+        if (VideoSet != null) VideoSet.SetActive(false);
+        if (ControllerSet != null) ControllerSet.SetActive(false);
+        if (ETCSet != null) ETCSet.SetActive(false);
+    }
+
+    private void ShowVideoSet() {
+        if (AudioSet != null) AudioSet.SetActive(false);
+        if (VideoSet != null) VideoSet.SetActive(true);
+        if (ControllerSet != null) ControllerSet.SetActive(false);
+        if (ETCSet != null) ETCSet.SetActive(false);
+    }
+
+    private void ShowControllerSet() {
+        if (AudioSet != null) AudioSet.SetActive(false);
+        if (VideoSet != null) VideoSet.SetActive(false);
+        if (ControllerSet != null) ControllerSet.SetActive(true);
+        if (ETCSet != null) ETCSet.SetActive(false);
+    }
+
+    private void ShowETCSet() {
+        if (AudioSet != null) AudioSet.SetActive(false);
+        if (VideoSet != null) VideoSet.SetActive(false);
+        if (ControllerSet != null) ControllerSet.SetActive(false);
+        if (ETCSet != null) ETCSet.SetActive(true);
+    }
+    #endregion
 }
