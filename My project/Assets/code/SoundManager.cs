@@ -5,11 +5,13 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    public AudioSource bgm;
+    public AudioSource bgmSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        bgm.Play();
+        if (bgmSource != null)
+            bgmSource.Play();
     }
 
     // Update is called once per frame
@@ -17,4 +19,5 @@ public class SoundManager : MonoBehaviour
     {
         
     }
+
 }
