@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5727230941516496690}
   - component: {fileID: -8183477895105322074}
   - component: {fileID: -9047786572359336500}
+  - component: {fileID: 8826256150284297366}
   m_Layer: 7
   m_Name: Character
   m_TagString: Player
@@ -178,8 +179,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 6
   minJumpForce: 7
-  maxJumpForce: 15
+  maxJumpForce: 20
   chargeTime: 1
+  canWalk: 1
   fallThreshold: 0.9
 --- !u!95 &5855995849297929179
 Animator:
@@ -293,3 +295,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7bb5fbee8554391b074c0c71d92c99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8826256150284297366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596405228486957739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ded9f467bf0314489913550cd6de32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite1: {fileID: 189971010, guid: d7136a6925d704c4a8728e8b3e877225, type: 3}
+  sprite2: {fileID: 0}
+  speed: 5

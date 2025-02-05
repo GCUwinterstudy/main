@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.056332234, g: 0.00948602, b: 0.00094343803, a: 1}
+  m_IndirectSpecularColor: {r: 0.056278255, g: 0.009438166, b: 0.0009432097, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1212,6 +1212,7 @@ GameObject:
   - component: {fileID: 254942948}
   - component: {fileID: 254942947}
   - component: {fileID: 254942949}
+  - component: {fileID: 254942950}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1266,6 +1267,20 @@ MonoBehaviour:
   mainMenuButton: {fileID: 1324713481}
   exitButton: {fileID: 454044951}
   optionsPanel: {fileID: 1342054889}
+--- !u!114 &254942950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254942946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d32550da1a228544b52c761191daeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  princessPrefab: {fileID: 3021690174677100723, guid: 7086e96feeb5dcd43b6c80cc35db9bbb, type: 3}
+  spawnPoint: {fileID: 391965413}
 --- !u!1 &261091169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2388,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &391965412
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 391965413}
+  m_Layer: 0
+  m_Name: PrincessPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &391965413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391965412}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.21, y: 4.68, z: -0.10592739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &454044947
 GameObject:
   m_ObjectHideFlags: 0
@@ -17822,3 +17868,4 @@ SceneRoots:
   - {fileID: 1342054893}
   - {fileID: 1304462968}
   - {fileID: 1414463965}
+  - {fileID: 391965413}

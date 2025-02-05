@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private float currentChargeTime = 0f;  // 현재 차징된 시간
     private bool isCharging = false;       // 점프 버튼이 눌린 상태 여부
     private bool isJumping = false;
-    private bool canWalk = true;
+    public bool canWalk = true;
     private bool isDown = false;
     private bool isFall = false;
     private bool isStun = false;

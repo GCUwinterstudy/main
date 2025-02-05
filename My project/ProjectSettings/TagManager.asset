@@ -7,6 +7,7 @@ TagManager:
   - portal
   - block_static
   - Bullet
+  - Princess
   layers:
   - Default
   - TransparentFX
