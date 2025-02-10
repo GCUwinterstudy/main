@@ -28,7 +28,6 @@ public class OptionsPanelController : MonoBehaviour
     public Text controllerInfoText;     // 컨트롤러 키 안내 텍스트
 
     [Header("Control Buttons")]
-    public Button backButton;  // 옵션 패널 닫기(뒤로가기)
     public Button saveButton;  // 설정 저장 버튼
     public Button resetButton; // 설정 초기화 버튼
 
@@ -85,8 +84,6 @@ public class OptionsPanelController : MonoBehaviour
         LoadSettings();
 
         // 버튼 이벤트 연결
-        if (backButton != null)
-            backButton.onClick.AddListener(OnBackButton);
         if (saveButton != null)
             saveButton.onClick.AddListener(SaveSettings);
         if (resetButton != null)
@@ -210,14 +207,4 @@ public class OptionsPanelController : MonoBehaviour
 
     #endregion
 
-    #region 버튼 이벤트 처리
-
-    public void OnBackButton()
-    {
-        // 옵션 패널 닫기(필요에 따라 이전 메뉴로 돌아가는 로직 추가)
-        gameObject.SetActive(false);
-        Debug.Log("옵션 패널이 닫혔습니다.");
-    }
-
-    #endregion
 }

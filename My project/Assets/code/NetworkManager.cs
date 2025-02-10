@@ -44,7 +44,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Button ControllerButton;
     public Button ETCButton;
     public Button OptionBackButton;   // OptionPanel에서 뒤로가기(닫기) 버튼
-    public Button SaveButton;
 
     [Header("CreatePanel")]
     public GameObject CreatePanel;
