@@ -51,9 +51,8 @@ public class OptionsPanelController : MonoBehaviour
 
         if (resolutionDropdown == null)
         {
-        Debug.LogError("resolutionDropdown is not assigned in the inspector!");
-        // 여기서 return 하면 이후 코드는 실행되지 않음.
-        return;
+            Debug.LogError("resolutionDropdown is not assigned in the inspector!");
+            return;
         }
         // 해상도 목록 가져와 드롭다운 옵션으로 추가
         availableResolutions = Screen.resolutions;
@@ -73,12 +72,12 @@ public class OptionsPanelController : MonoBehaviour
         }
         resolutionDropdown.AddOptions(options);
 
-        // 저장된 설정 불러오기 (저장값 없으면 기본값 사용)
-        LoadSettings();
-
         // 컨트롤러 키 안내 텍스트 설정 (수정 불가능한 정보로 표시)
         if (controllerInfoText != null)
             controllerInfoText.text = controllerInfo;
+
+        // 저장된 설정 불러오기 (저장값 없으면 기본값 사용)
+        LoadSettings();
 
         // 버튼 이벤트 연결
         if (backButton != null)
@@ -87,48 +86,69 @@ public class OptionsPanelController : MonoBehaviour
             saveButton.onClick.AddListener(SaveSettings);
         if (resetButton != null)
             resetButton.onClick.AddListener(ResetSettings);
+
+        if (bgmVolumeSlider != null) {
+            bgmVolumeSlider.onValueChanged.AddListener(OnBGMVolumeChanged);
+        }
+        if (sfxVolumeSlider != null) {
+            sfxVolumeSlider.onValueChanged.AddListener(OnSFXVolumeChanged);
+        }
+        if (masterVolumeSlider != null) {
+            masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
+        }
+
+        
     }
 
 
-    // 슬라이더의 값(0~100)을 -80dB ~ 0dB로 변환하는 헬퍼 메서드
-    float SliderValueToDecibels(float sliderValue)
+    float ConvertSliderValueToDecibels(float sliderValue)
     {
-        return Mathf.Lerp(-80f, 0f, sliderValue / 100f);
+        float volume = sliderValue / 100f;
+        Debug.Log($"ConvertSliderValueToDecibels - Slider Value: {sliderValue} -> Volume (0-1): {volume}");
+    
+        // 0에 가까운 값은 로그 계산 시 무한대에 가까워지므로 별도로 처리
+        if (volume <= 0.0001f) {
+            Debug.Log("Volume is near zero; returning -80 dB");
+            return -80f;
+        }
+        // 20 * log10(volume)은 volume이 1일 때 0 dB, 0.5일 때 약 -6 dB를 반환
+        float dB = 20f * Mathf.Log10(volume);
+        Debug.Log($"Calculated dB: {dB}");
+
+        return dB;
     }
 
 
     #region 슬라이더 실시간 볼륨 조절
-    void OnBGMVolumeChanged(float value) {
-        if (newAudioMixer != null)
-        {
-            float dB = SliderValueToDecibels(value);
-            newAudioMixer.SetFloat("BGMVolume", dB);
-        }
+    public void OnBGMVolumeChanged(float sliderValue)
+    {
+        float dB = ConvertSliderValueToDecibels(sliderValue);
+        newAudioMixer.SetFloat("BGMVolume", dB);
+        Debug.Log($"OnBGMVolumeChanged - Slider Value: {sliderValue}, dB: {dB}");
+
     }
 
-    void OnSFXVolumeChanged(float value)
+    public void OnSFXVolumeChanged(float sliderValue)
     {
-        if (newAudioMixer != null)
-        {
-            float dB = SliderValueToDecibels(value);
-            newAudioMixer.SetFloat("SFXVolume", dB);
-        }
+        float dB = ConvertSliderValueToDecibels(sliderValue);
+        newAudioMixer.SetFloat("SFXVolume", dB);
+        Debug.Log($"OnSFXVolumeChanged - Slider Value: {sliderValue}, dB: {dB}");
+
     }
 
-    void OnMasterVolumeChanged(float value)
+    public void OnMasterVolumeChanged(float sliderValue)
     {
-        if (newAudioMixer != null)
-        {
-            float dB = SliderValueToDecibels(value);
-            newAudioMixer.SetFloat("MasterVolume", dB);
-        }
+        float dB = ConvertSliderValueToDecibels(sliderValue);
+        newAudioMixer.SetFloat("MasterVolume", dB);
+        Debug.Log($"OnMasterVolumeChanged - Slider Value: {sliderValue}, dB: {dB}");
+
     }
 
     #endregion
 
     #region 설정 불러오기, 저장, 초기화
 
-    void LoadSettings()
+    public void LoadSettings()
     {
         // 오디오 설정 불러오기 (기본값 100%)
         float bgmVolume = PlayerPrefs.GetFloat(KEY_BGM_VOLUME, 50f);
@@ -145,7 +165,7 @@ public class OptionsPanelController : MonoBehaviour
         if (fullscreenToggle != null) fullscreenToggle.isOn = isFullscreen;
     }
 
-    void SaveSettings()
+    public void SaveSettings()
     {
         if (bgmVolumeSlider != null)
             PlayerPrefs.SetFloat(KEY_BGM_VOLUME, bgmVolumeSlider.value);
@@ -168,7 +188,7 @@ public class OptionsPanelController : MonoBehaviour
         Debug.Log("설정이 저장되었습니다.");
     }
 
-    void ResetSettings()
+    public void ResetSettings()
     {
         // 오디오 슬라이더 기본값 100%
         if (bgmVolumeSlider != null) bgmVolumeSlider.value = 50f;
@@ -186,7 +206,7 @@ public class OptionsPanelController : MonoBehaviour
 
     #region 버튼 이벤트 처리
 
-    void OnBackButton()
+    public void OnBackButton()
     {
         // 옵션 패널 닫기(필요에 따라 이전 메뉴로 돌아가는 로직 추가)
         gameObject.SetActive(false);
