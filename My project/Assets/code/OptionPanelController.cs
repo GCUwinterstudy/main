@@ -7,6 +7,22 @@ using UnityEngine.UI;
 
 public class OptionsPanelController : MonoBehaviour
 {
+    [Header("OptionPanel")]
+    public GameObject OptionPanel;
+    // OptionPanel 내에서 각 세트별 하위 패널들
+    [Header("Option Sub Panels")]
+    public GameObject AudioSet;       // 오디오 설정 패널
+    public GameObject VideoSet;       // 그래픽(비디오) 설정 패널
+    public GameObject ControllerSet;  // 컨트롤러(키 안내) 설정 패널
+    public GameObject ETCSet;         // 기타 정보(예: 개발자소개, 펀딩 등) 패널
+
+    // OptionPanel 내부 버튼들
+    public Button AudioButton;
+    public Button VideoButton;
+    public Button ControllerButton;
+    public Button ETCButton;
+    public Button OptionBackButton;   // OptionPanel에서 뒤로가기(닫기) 버튼
+
     [Header("Audio Settings (0~100%)")]
     public Slider bgmVolumeSlider;     // 배경음악 볼륨 슬라이더 (0~100)
     public Slider sfxVolumeSlider;     // 효과음(SFX) 볼륨 슬라이더 (0~100)
@@ -99,6 +115,19 @@ public class OptionsPanelController : MonoBehaviour
             masterVolumeSlider.onValueChanged.AddListener(OnMasterVolumeChanged);
         }
 
+        if(AudioButton != null)
+            AudioButton.onClick.AddListener(ShowAudioSet);
+        if(VideoButton != null)
+            VideoButton.onClick.AddListener(ShowVideoSet);
+        if(ControllerButton != null)
+            ControllerButton.onClick.AddListener(ShowControllerSet);
+        if(ETCButton != null)
+            ETCButton.onClick.AddListener(ShowETCSet);
+
+        if(OptionBackButton != null)
+            OptionBackButton.onClick.AddListener(() => { 
+                OptionPanel.SetActive(false);
+            });
         
     }
 
@@ -207,4 +236,35 @@ public class OptionsPanelController : MonoBehaviour
 
     #endregion
 
+    #region OPTION_PANEL LOGIC
+    // 각 하위 옵션 세트를 표시하는 메서드들.
+    private void ShowAudioSet() {
+        if (AudioSet != null) AudioSet.SetActive(true);
+        if (VideoSet != null) VideoSet.SetActive(false);
+        if (ControllerSet != null) ControllerSet.SetActive(false);
+        if (ETCSet != null) ETCSet.SetActive(false);
+    }
+
+    private void ShowVideoSet() {
+        if (AudioSet != null) AudioSet.SetActive(false);
+        if (VideoSet != null) VideoSet.SetActive(true);
+        if (ControllerSet != null) ControllerSet.SetActive(false);
+        if (ETCSet != null) ETCSet.SetActive(false);
+    }
+
+    private void ShowControllerSet() {
+        if (AudioSet != null) AudioSet.SetActive(false);
+        if (VideoSet != null) VideoSet.SetActive(false);
+        if (ControllerSet != null) ControllerSet.SetActive(true);
+        if (ETCSet != null) ETCSet.SetActive(false);
+    }
+
+    private void ShowETCSet() {
+        if (AudioSet != null) AudioSet.SetActive(false);
+        if (VideoSet != null) VideoSet.SetActive(false);
+        if (ControllerSet != null) ControllerSet.SetActive(false);
+        if (ETCSet != null) ETCSet.SetActive(true);
+    }
+    #endregion
 }
+
