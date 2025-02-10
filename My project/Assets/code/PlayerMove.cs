@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
+using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerMove : MonoBehaviourPunCallbacks
 {
@@ -24,6 +25,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private bool isStun = false;
     private float fallTimer = 0f;     // 하강 시간 누적용
     public float fallThreshold = 3f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
+    public int stunCount = 0; // 각 플레이어의 stun 횟수
 
     private void Awake()
     {
@@ -167,9 +169,16 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     // 기절(Stun) 상태를 지정 시간 동안 유지하는 코루틴
     IEnumerator StunRoutine(float stunDuration)
     {
+        stunCount ++;
         Debug.Log("stuned!");
         isStun = true;   // 기절 상태
         canWalk = false; // 이동 불가
+
+        // Custom Properties에 stunCount 업데이트
+        Hashtable props = new Hashtable();
+        props["stunCount"] = stunCount;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+
         rigid.velocity = new Vector2(0f, rigid.velocity.y);
         animator.SetBool("isStun", true);
 
