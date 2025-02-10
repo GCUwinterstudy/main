@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -20,7 +21,7 @@ public class OptionsPanelController : MonoBehaviour
 
 
     [Header("Video/Graphics Settings")]
-    public Dropdown resolutionDropdown; // 해상도 선택 드롭다운
+    public TMP_Dropdown resolutionDropdown; // 해상도 선택 드롭다운
     public Toggle fullscreenToggle;     // 전체 화면 여부 토글
 
     [Header("Controller (Key Info)")]
@@ -54,23 +55,27 @@ public class OptionsPanelController : MonoBehaviour
             Debug.LogError("resolutionDropdown is not assigned in the inspector!");
             return;
         }
-        // 해상도 목록 가져와 드롭다운 옵션으로 추가
-        availableResolutions = Screen.resolutions;
-        resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        int currentResIndex = 0;
-        for (int i = 0; i < availableResolutions.Length; i++)
-        {
-            string option = availableResolutions[i].width + " x " + availableResolutions[i].height;
-            options.Add(option);
 
-            if (availableResolutions[i].width == Screen.currentResolution.width &&
-                availableResolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResIndex = i;
-            }
-        }
+        // 1. 수동으로 4개의 해상도 옵션을 설정
+        List<string> options = new List<string>()
+        {
+            "1920 x 1080",
+            "1680 x 1050",
+            "1440 x 900",
+            "1280 x 800"
+        };
+        resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
+
+        // 2. availableResolutions 배열을 4개의 해상도로 직접 생성
+        availableResolutions = new Resolution[4];
+        availableResolutions[0] = new Resolution() { width = 1920, height = 1080 };
+        availableResolutions[1] = new Resolution() { width = 1680, height = 1050 };
+        availableResolutions[2] = new Resolution() { width = 1440, height = 900 };
+        availableResolutions[3] = new Resolution() { width = 1280, height = 800 };
+
+        // 기본 해상도를 1920x1080 (인덱스 0)으로 설정
+        resolutionDropdown.value = 0;
 
         // 컨트롤러 키 안내 텍스트 설정 (수정 불가능한 정보로 표시)
         if (controllerInfoText != null)
@@ -159,10 +164,11 @@ public class OptionsPanelController : MonoBehaviour
         if (masterVolumeSlider != null) masterVolumeSlider.value = masterVolume;
 
         // 비디오 설정 불러오기
-        int resIndex = PlayerPrefs.GetInt(KEY_RESOLUTION, resolutionDropdown.options.Count - 1);
+        int resIndex = PlayerPrefs.GetInt(KEY_RESOLUTION, 0);
         if (resolutionDropdown != null) resolutionDropdown.value = resIndex;
-        bool isFullscreen = PlayerPrefs.GetInt(KEY_FULLSCREEN, 1) == 1;
+        bool isFullscreen = PlayerPrefs.GetInt(KEY_FULLSCREEN, 0) == 1;
         if (fullscreenToggle != null) fullscreenToggle.isOn = isFullscreen;
+
     }
 
     public void SaveSettings()
