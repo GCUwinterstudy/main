@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EndingManager : MonoBehaviour
@@ -10,6 +11,10 @@ public class EndingManager : MonoBehaviour
 
     // 엔딩 상태를 나타내는 변수 (다른 스크립트에서 변경할 수 있습니다.)
     public static bool isEnding = false;
+    private bool changePanel = false;
+    private int num = 0;
+    public GameObject stunPanel;
+    public GameObject winnerPanel;
 
     void Start()
     {
@@ -29,6 +34,7 @@ public class EndingManager : MonoBehaviour
             // 한 번 실행된 후 더 이상 반복 실행되지 않도록 isEnding을 false로 전환하거나
             // 별도의 플래그로 실행 여부를 관리합니다.
             isEnding = false;
+            changePanel = true;
         }
     }
 

@@ -174,11 +174,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         isStun = true;   // 기절 상태
         canWalk = false; // 이동 불가
 
+        /*
         // Custom Properties에 stunCount 업데이트
         Hashtable props = new Hashtable();
         props["stunCount"] = stunCount;
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-
+        */
         rigid.velocity = new Vector2(0f, rigid.velocity.y);
         animator.SetBool("isStun", true);
 
