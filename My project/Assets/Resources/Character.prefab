@@ -308,5 +308,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite1: {fileID: 189971010, guid: d7136a6925d704c4a8728e8b3e877225, type: 3}
-  sprite2: {fileID: 0}
   speed: 5
