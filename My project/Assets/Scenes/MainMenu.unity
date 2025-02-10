@@ -5268,7 +5268,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.1464, y: 0}
+  m_AnchoredPosition: {x: -1.1464005, y: 0}
   m_SizeDelta: {x: 7.70723, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291727000
@@ -6173,7 +6173,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.4399986, y: 0}
+  m_AnchoredPosition: {x: 1.4399948, y: 0}
   m_SizeDelta: {x: 9.98738, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &326615506
@@ -7807,7 +7807,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.1464, y: 0}
+  m_AnchoredPosition: {x: -1.1464005, y: 0}
   m_SizeDelta: {x: 7.70723, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &439292878
@@ -20809,7 +20809,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.4399986, y: 0}
+  m_AnchoredPosition: {x: 1.4399948, y: 0}
   m_SizeDelta: {x: 9.98738, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1400836639
@@ -21533,7 +21533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.4399986, y: 0}
+  m_AnchoredPosition: {x: 1.4399948, y: 0}
   m_SizeDelta: {x: 9.98738, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1465301342
@@ -22035,12 +22035,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 326615505}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1562885728}
+        m_TargetAssemblyTypeName: OptionsPanelController, Assembly-CSharp
+        m_MethodName: OnSFXVolumeChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 10
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1507339078
 GameObject:
   m_ObjectHideFlags: 0
@@ -25259,12 +25271,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1465301341}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1562885728}
+        m_TargetAssemblyTypeName: OptionsPanelController, Assembly-CSharp
+        m_MethodName: OnMasterVolumeChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 50
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1696381272
 GameObject:
   m_ObjectHideFlags: 0
@@ -26421,12 +26445,24 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1400836638}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 100
   m_WholeNumbers: 0
-  m_Value: 0.5
+  m_Value: 50
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1562885728}
+        m_TargetAssemblyTypeName: OptionsPanelController, Assembly-CSharp
+        m_MethodName: OnBGMVolumeChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 50
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1773983387
 GameObject:
   m_ObjectHideFlags: 0
