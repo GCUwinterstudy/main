@@ -44,6 +44,9 @@ MonoBehaviour:
   - TriggerEndingRPC
   - TriggerEndingCameraRPC
   - TriggerEndingManagerRPC
+  - RemovePlayerRPC
+  - SaveEndTimeRPC
+  - SetWinnerRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

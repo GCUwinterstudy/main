@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
@@ -7,14 +8,14 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerMove : MonoBehaviourPunCallbacks
 {
-    public float maxSpeed; // 최대 속력
+    public float maxSpeed = 7; // 최대 속력
     Rigidbody2D rigid;           // 물리 이동을 위한 변수
     SpriteRenderer spriteRenderer; // 방향 전환을 위한 변수
     Animator animator;           // 애니메이터 조작을 위한 변수
     BoxCollider2D col2D;
 
-    public float minJumpForce = 20f;  // 최소 점프 강도
-    public float maxJumpForce = 30f;  // 최대 점프 강도
+    public float minJumpForce = 10f;  // 최소 점프 강도
+    public float maxJumpForce = 20f;  // 최대 점프 강도
     public float chargeTime = 2f;     // 최대 차징 시간
     private float currentChargeTime = 0f;  // 현재 차징된 시간
     private bool isCharging = false;       // 점프 버튼이 눌린 상태 여부
@@ -24,7 +25,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private bool isFall = false;
     private bool isStun = false;
     private float fallTimer = 0f;     // 하강 시간 누적용
-    public float fallThreshold = 3f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
+    public float fallThreshold = 1f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
 
     // 각 플레이어별 stun 횟수와 jump 횟수
     public int stunCount = 0;
@@ -41,7 +42,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     public AudioClip stunSound;
     public AudioClip chargeSound;
     private AudioSource audioSource;
-
     private void Awake()
     {
         // 오프라인 모드 설정 (싱글플레이)
@@ -67,6 +67,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsConnected && !photonView.IsMine)
             return;
+
+        if (CameraController.isEnding || EndingManager.isEnding)
+        {
+        canWalk = false; // 이동 불가
+        isCharging = false; // 점프 차징 불가
+        }
 
         // 이동 및 방향 처리 (canWalk와 isStun 상태 확인)
         if (canWalk && !isStun)
@@ -136,6 +142,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks
                 }
             }
         }
+
+        UpdatePlayerStatsCustomProperties();
     }
 
     void FixedUpdate()
@@ -288,14 +296,15 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     // Custom Properties 업데이트 함수 (stunCount, jumpCount, yDistance)
     void UpdatePlayerStatsCustomProperties()
     {
+        if (!EndingManager.isEnding)
+        {
         PhotonHashtable props = new PhotonHashtable();
         props["stunCount"] = stunCount;
         props["jumpCount"] = jumpCount;
-        // 기준점은 EndingManager.referenceY (없으면 0으로 가정)
-        float referenceY = EndingManager.referenceY;
-        float yDistance = transform.position.y - referenceY;
+        float yDistance = transform.position.y+5; //시작지점의 y좌표가 음수라 임시로 5추가, 차후 distance계산방법 변경예정
         props["yDistance"] = yDistance;
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        }
     }
 
     // 지면 감지 함수

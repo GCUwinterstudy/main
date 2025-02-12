@@ -5,7 +5,7 @@ using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class EndingManager : MonoBehaviour
+public class EndingManager : MonoBehaviourPunCallbacks
 {
     // 기존 맵 UI (예: HUD, 미니맵 등)
     public GameObject mapUI;
@@ -19,13 +19,15 @@ public class EndingManager : MonoBehaviour
     public TMP_Text[] stunTexts;      // stun 횟수 표시용
     public TMP_Text[] jumpTexts;      // jump 횟수 표시용
     public TMP_Text[] distanceTexts;  // 기준점과의 y축 거리 표시용
-    public TMP_Text winnerName;       // 1등 유저 이름 표시 (예: 가장 높은 yDistance 혹은 조건에 따른 승리자)
-
+    public TMP_Text winnerNameText;       // 1등 유저 이름 표시 (예: 가장 높은 yDistance 혹은 조건에 따른 승리자)
+    public TMP_Text timeText;
     public Button mainMenuButton;
     public Button exitButton;
 
-    // 기준점 Y (예: 0 또는 원하는 값)
-    public static float referenceY = 0f;
+    private float startTime;
+    private float endTime;
+
+    public static string winnerName = ""; // winner 저장 변수
 
     void Start()
     {
@@ -38,6 +40,8 @@ public class EndingManager : MonoBehaviour
             mainMenuButton.onClick.AddListener(ReturnToMainMenu);
         if (exitButton != null)
             exitButton.onClick.AddListener(ExitGame);
+
+        startTime = Time.time;
     }
 
     void Update()
@@ -45,6 +49,12 @@ public class EndingManager : MonoBehaviour
         // 엔딩이 시작되면 UI를 전환하고 플레이어 스탯을 업데이트
         if (isEnding)
         {
+            if(endTime==0f)
+            {
+                endTime = Time.time - startTime; // 게임 시작부터 엔딩까지의 경과 시간
+                string formattedTime = FormatTime(endTime);
+                photonView.RPC("SaveEndTimeRPC", RpcTarget.All, formattedTime);
+            }
             TriggerEnding();
             UpdateStatsDisplay();
             isEnding = false; // 엔딩 이벤트는 한 번만 실행
@@ -138,26 +148,28 @@ public class EndingManager : MonoBehaviour
 
         if (players.Length > 1 && winnerName != null)
         {
-        Photon.Realtime.Player winner = players[0];
-        float maxYDist = 0f;
-        foreach (var p in players)
-        {
-            float yd = 0f;
-            if (p.CustomProperties.ContainsKey("yDistance"))
-                yd = System.Convert.ToSingle(p.CustomProperties["yDistance"]);
-            Debug.Log($"플레이어 {p.NickName}의 yDistance: {yd}");
-            if (yd > maxYDist)
-            {
-                maxYDist = yd;
-                winner = p;
-            }
-        }
-        Debug.Log($"Winner 결정: {winner.NickName} with yDistance {maxYDist}");
-        winnerName.text = winner.NickName;
+            winnerNameText.text = winnerName;
         }
         else if(players.Length == 1 && winnerName != null)
         {
-            winnerName.text = "PLAYER";
+            winnerNameText.text = "PLAYER";
+        }
+    }
+
+    string FormatTime(float timeInSeconds)
+    {
+        int hours = Mathf.FloorToInt(timeInSeconds / 3600);
+        int minutes = Mathf.FloorToInt((timeInSeconds % 3600) / 60);
+        int seconds = Mathf.FloorToInt(timeInSeconds % 60);
+        return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
+    }
+
+    [PunRPC]
+    void SaveEndTimeRPC(string formattedTime)
+    {
+        if(timeText!=null)
+        {
+            timeText.text = formattedTime;
         }
     }
 }

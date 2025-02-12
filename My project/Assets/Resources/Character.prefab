@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5886713902357239877}
   - component: {fileID: 5739960444474883793}
   - component: {fileID: 765948808990743043}
-  - component: {fileID: 4061832970010732348}
   - component: {fileID: 5855995849297929179}
+  - component: {fileID: -161170757650258048}
   - component: {fileID: -4474369501343655333}
   - component: {fileID: 5727230941516496690}
   - component: {fileID: -8183477895105322074}
@@ -165,29 +165,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4061832970010732348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1596405228486957739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b63ad55754d9e4e82d13d3e55a103a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 6
-  minJumpForce: 7
-  maxJumpForce: 20
-  chargeTime: 1
-  canWalk: 1
-  fallThreshold: 0.9
-  stunCount: 0
-  jumpCount: 0
-  jumpSound: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
-  stunSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
-  chargeSound: {fileID: 8300000, guid: 174818bacb99d49ad9cd485517c8ccd2, type: 3}
 --- !u!95 &5855995849297929179
 Animator:
   serializedVersion: 5
@@ -209,6 +186,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-161170757650258048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596405228486957739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf8d661170cd88247b86b74d6497b720, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 7
+  minJumpForce: 10
+  maxJumpForce: 20
+  chargeTime: 2
+  canWalk: 1
+  fallThreshold: 1
+  stunCount: 0
+  jumpCount: 0
+  jumpSound: {fileID: 0}
+  stunSound: {fileID: 0}
+  chargeSound: {fileID: 0}
 --- !u!114 &-4474369501343655333
 MonoBehaviour:
   m_ObjectHideFlags: 0

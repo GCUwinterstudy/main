@@ -1,5 +1,6 @@
 using System.Collections;
 using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class GameEnd : MonoBehaviourPunCallbacks
@@ -38,6 +39,9 @@ public class GameEnd : MonoBehaviourPunCallbacks
         // 공주와 충돌 시
         if (other.CompareTag("Princess"))
         {
+            string winnerName = PhotonNetwork.LocalPlayer.NickName;
+            Debug.Log(winnerName);
+            photonView.RPC("SetWinnerRPC", RpcTarget.All, winnerName);
             StartCoroutine(EndRoutine(2.0f));
         }
     }
@@ -53,18 +57,15 @@ public class GameEnd : MonoBehaviourPunCallbacks
         spriteRenderer.sprite = sprite1;
         animator.SetTrigger("PrincessWalk");
 
-        // 플레이어 이동을 막음 (PlayerMove가 있을 경우)
-        PlayerMove playerMove = GetComponent<PlayerMove>();
-        if (playerMove != null)
-        {
-            playerMove.canWalk = false;
-        }
-
         isWalking = true;
 
         // 대기 후, 모든 클라이언트에 엔딩 상태를 활성화하도록 RPC 호출
         yield return new WaitForSeconds(waitTime);
+
         photonView.RPC("TriggerEndingManagerRPC", RpcTarget.All);
+
+        // 모든 플레이어를 없앰
+        photonView.RPC("RemovePlayerRPC", RpcTarget.All);
     }
 
     [PunRPC]
@@ -80,5 +81,17 @@ public class GameEnd : MonoBehaviourPunCallbacks
     {
         // 모든 클라이언트에서 EndingManager의 엔딩 상태를 활성화
         EndingManager.isEnding = true;
+    }
+
+    [PunRPC]
+    void SetWinnerRPC(string winnerName)
+    {
+        EndingManager.winnerName = winnerName;
+    }
+    
+    [PunRPC]
+    void RemovePlayerRPC()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 }
