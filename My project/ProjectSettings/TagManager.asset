@@ -8,6 +8,8 @@ TagManager:
   - block_static
   - Bullet
   - Princess
+  - Platform
+  - Wall
   layers:
   - Default
   - TransparentFX
