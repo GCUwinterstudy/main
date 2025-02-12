@@ -95,10 +95,16 @@ public class EscController : MonoBehaviourPunCallbacks
         optionsPanel.SetActive(false);
         Debug.Log("ReturnToMainMenu: OptionsPanel 비활성화");
     }
+
+    if (PhotonNetwork.IsConnected) {
+        Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+    } else {
+        SceneManager.LoadScene("MainMenu");
+    }
     
-    Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
-    PhotonNetwork.LeaveRoom();
-    PhotonNetwork.Disconnect();
+    
     }
 
     public override void OnLeftRoom()

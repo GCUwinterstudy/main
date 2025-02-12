@@ -19,6 +19,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Button OptionButton;
     public Button ExitButton;
 
+    [Header("SingleplayPanel")]
+    public GameObject SingleplayPanel;
+    public TMP_Dropdown mapSingleSelect;
+    public Image OriginalImage;
+    public Image DungeonImage;
+    public Button SingleBack;
+    public Button SingleStart;
+
     [Header("LobbyPanel")]
     public GameObject LobbyPanel;
     public Button[] CellBtn;
@@ -71,6 +79,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public TMP_Text RoomMapText;
     public TMP_Text[] ChatText;
     public TMP_InputField ChatInput;
+    public Image OriginalImage2;
+    public Image DungeonImage2;
     public Button ChatSendButton;
     public Button BackLobbyButton3;
     public Button GameProceedButton;
@@ -92,6 +102,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Screen.SetResolution(1920, 1080, false);
 
         MenuPanel.SetActive(true);
+        SingleplayPanel.SetActive(false);
         CreatePanel.SetActive(false);
         JoinMenu.SetActive(false);
         RoomPanel.SetActive(false);
@@ -103,10 +114,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if(ControllerSet != null) ControllerSet.SetActive(false);
         if(ETCSet != null) ETCSet.SetActive(false);
 
-        //SingleplayButton.onClick.AddListener(onClickSingleplay);
+        SingleplayButton.onClick.AddListener(onClickSinglePlay);
         MultiplayButton.onClick.AddListener(onClickMultiplay);
         OptionButton.onClick.AddListener(OnClickOption);
         ExitButton.onClick.AddListener(() => Application.Quit());
+
+        SingleBack.onClick.AddListener(BackToMain);
+        SingleStart.onClick.AddListener(StartGameSingle);
+        if (mapSingleSelect != null)
+        {
+            mapSingleSelect.onValueChanged.AddListener(OnMapSelectionChanged);
+            // 기본 선택값에 따른 이미지 초기화
+            OnMapSelectionChanged(mapSingleSelect.value);
+        }
 
         BackMainButton.onClick.AddListener(BackToMainFromLobby);
         CreateButton.onClick.AddListener(OpenCreatePanel);
@@ -122,6 +142,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ChatSendButton.onClick.AddListener(SendChat);
         BackLobbyButton3.onClick.AddListener(LeaveRoom);
         GameProceedButton.onClick.AddListener(GameProceed);
+        if (MapSelect != null)
+        {
+            MapSelect.onValueChanged.AddListener(OnMapSelection);
+            // 기본 선택값에 따른 이미지 초기화
+            OnMapSelection(MapSelect.value);
+        }
 
         for (int i = 0; i < CellBtn.Length; i++) {
             int index = i;
@@ -180,6 +206,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             Debug.LogWarning("MenuPanel 참조가 없습니다.");
         }
 
+        if (SingleplayPanel != null) {
+            SingleplayPanel.SetActive(false);
+            Debug.Log("SingleplayPanel 비활성화");
+        } else {
+            Debug.LogWarning("SingleplayPanel 참조가 없습니다.");
+        }
+
         if (LobbyPanel != null) {
             LobbyPanel.SetActive(false);
             Debug.Log("LobbyPanel 비활성화");
@@ -211,8 +244,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
 
     #region MENU_PANEL
-    private void OnClickSinglePlay() {
-        // SinglePlay
+    private void onClickSinglePlay() {
+        MenuPanel.SetActive(false);
+        SingleplayPanel.SetActive(true);
     }
 
     private void onClickMultiplay() {
@@ -274,6 +308,52 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         MyListRenewal();
     }
+    #endregion
+
+    #region SINGLEPLAY_PANEL
+    private void BackToMain() {
+        SingleplayPanel.SetActive(false);
+        MenuPanel.SetActive(true);
+    }
+
+    private void StartGameSingle() {
+        string map = mapSingleSelect.options[mapSingleSelect.value].text;
+        string sceneToLoad = "";
+        switch (map) {
+            case "Original":
+                sceneToLoad = "SampleScene";
+                break;
+            case "Dungeon":
+                sceneToLoad = "ssseonjun";
+                break;
+            default:
+                return;
+        }
+
+        Destroy(gameObject);
+        SceneManager.LoadScene(sceneToLoad);
+    }
+
+    private void OnMapSelectionChanged(int index)
+    {
+        string selectedMap = mapSingleSelect.options[index].text;
+        switch (selectedMap)
+        {
+            case "Original":
+                if (OriginalImage != null) OriginalImage.gameObject.SetActive(true);
+                if (DungeonImage != null) DungeonImage.gameObject.SetActive(false);
+                break;
+            case "Dungeon":
+                if (OriginalImage != null) OriginalImage.gameObject.SetActive(false);
+                if (DungeonImage != null) DungeonImage.gameObject.SetActive(true);
+                break;
+            default:
+                if (OriginalImage != null) OriginalImage.gameObject.SetActive(false);
+                if (DungeonImage != null) DungeonImage.gameObject.SetActive(false);
+                break;
+        }
+    }
+
     #endregion
 
 
@@ -548,8 +628,28 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (LobbyPanel != null) LobbyPanel.SetActive(true);
         if (RoomPanel != null) RoomPanel.SetActive(false);
     }
-    PhotonNetwork.LocalPlayer.NickName = "";
-}
+        PhotonNetwork.LocalPlayer.NickName = "";
+    }
+
+    private void OnMapSelection(int index)
+    {
+        string selectedMap = MapSelect.options[index].text;
+        switch (selectedMap)
+        {
+            case "Original":
+                if (OriginalImage2 != null) OriginalImage2.gameObject.SetActive(true);
+                if (DungeonImage2 != null) DungeonImage2.gameObject.SetActive(false);
+                break;
+            case "Dungeon":
+                if (OriginalImage2 != null) OriginalImage2.gameObject.SetActive(false);
+                if (DungeonImage2 != null) DungeonImage2.gameObject.SetActive(true);
+                break;
+            default:
+                if (OriginalImage2 != null) OriginalImage2.gameObject.SetActive(false);
+                if (DungeonImage2 != null) DungeonImage2.gameObject.SetActive(false);
+                break;
+        }
+    }
 
     private void GameProceed() {
         if (!PhotonNetwork.IsMasterClient) {
@@ -574,6 +674,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         switch (map) {
             case "Original":
                 sceneToLoad = "SampleScene";
+                break;
+            case "Dungeon":
+                sceneToLoad = "ssseonjun";
                 break;
             default:
                 CancelRoom();
