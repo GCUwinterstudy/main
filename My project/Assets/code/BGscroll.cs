@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class BGScroll : MonoBehaviour
+public class BGScrollUI : MonoBehaviour
 {
-    #region Inspector
+    public RawImage rawImage;  // Inspector에서 할당
+    public float scrollSpeed = 1f;
 
-    public Renderer renderer;
-    public float speed = 1f;
-
-    #endregion
-
-    private void Update()
+    void Update()
     {
-        float move = Time.deltaTime * speed;
-        renderer.material.mainTextureOffset += Vector2.right * move;
+        if (rawImage != null)
+        {
+            Rect uvRect = rawImage.uvRect;
+            uvRect.x += Time.deltaTime * scrollSpeed;
+            rawImage.uvRect = uvRect;
+        }
     }
 }

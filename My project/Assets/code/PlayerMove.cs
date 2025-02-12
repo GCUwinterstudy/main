@@ -284,7 +284,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         props["jumpCount"] = jumpCount;
         // 기준점은 EndingManager.referenceY (없으면 0으로 가정)
         float referenceY = EndingManager.referenceY;
-        float yDistance = Mathf.Abs(transform.position.y - referenceY);
+        float yDistance = transform.position.y - referenceY;
         props["yDistance"] = yDistance;
         PhotonNetwork.LocalPlayer.SetCustomProperties(props);
     }

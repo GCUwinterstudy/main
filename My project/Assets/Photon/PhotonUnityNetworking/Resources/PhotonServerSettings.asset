@@ -41,6 +41,9 @@ MonoBehaviour:
   - RespawnSpaceship
   - ChatRPC
   - DestroyPrincess
+  - TriggerEndingRPC
+  - TriggerEndingCameraRPC
+  - TriggerEndingManagerRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

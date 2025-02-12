@@ -19,16 +19,16 @@ public class EndingManager : MonoBehaviour
     public TMP_Text[] stunTexts;      // stun 횟수 표시용
     public TMP_Text[] jumpTexts;      // jump 횟수 표시용
     public TMP_Text[] distanceTexts;  // 기준점과의 y축 거리 표시용
+    public TMP_Text winnerName;       // 1등 유저 이름 표시 (예: 가장 높은 yDistance 혹은 조건에 따른 승리자)
 
     public Button mainMenuButton;
     public Button exitButton;
 
-    // 기준점 Y (예: 0 또는 원하는 값) → Inspector에서 설정하거나 기본값 사용
+    // 기준점 Y (예: 0 또는 원하는 값)
     public static float referenceY = 0f;
 
     void Start()
     {
-        // 엔딩 패널은 기본적으로 비활성화
         if (endingPanel != null)
         {
             endingPanel.SetActive(false);
@@ -42,16 +42,15 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
-        // 엔딩이 시작되면 기존 UI를 끄고 엔딩 패널을 활성화한 후, 플레이어 스탯을 업데이트합니다.
+        // 엔딩이 시작되면 UI를 전환하고 플레이어 스탯을 업데이트
         if (isEnding)
         {
             TriggerEnding();
             UpdateStatsDisplay();
-            isEnding = false; // 엔딩 이벤트는 한 번만 실행하도록 함
+            isEnding = false; // 엔딩 이벤트는 한 번만 실행
         }
     }
 
-    // 엔딩 이벤트 처리: 기존 UI 끄고 엔딩 패널 활성화
     public void TriggerEnding()
     {
         if (mapUI != null)
@@ -66,11 +65,14 @@ public class EndingManager : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        if (PhotonNetwork.IsConnected) {
+        if (PhotonNetwork.IsConnected)
+        {
             Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
             PhotonNetwork.LeaveRoom();
             PhotonNetwork.Disconnect();
-        } else {
+        }
+        else
+        {
             SceneManager.LoadScene("MainMenu");
         }
     }
@@ -80,10 +82,10 @@ public class EndingManager : MonoBehaviour
         Application.Quit();
     }
 
-    // 각 플레이어의 스탯을 각기 다른 텍스트 배열에 업데이트하는 함수
+    // 각 플레이어의 스탯을 개별 텍스트에 업데이트하는 함수
     void UpdateStatsDisplay()
     {
-        Player[] players = PhotonNetwork.PlayerList;
+        Photon.Realtime.Player[] players = PhotonNetwork.PlayerList;
         for (int i = 0; i < players.Length; i++)
         {
             // 플레이어 이름 업데이트
@@ -92,7 +94,6 @@ public class EndingManager : MonoBehaviour
                 nameTexts[i].text = players[i].NickName;
             }
 
-            // 각 플레이어의 커스텀 프로퍼티에서 스탯 읽기
             int stun = 0, jump = 0;
             float yDist = 0f;
             if (players[i].CustomProperties.ContainsKey("stunCount"))
@@ -102,17 +103,14 @@ public class EndingManager : MonoBehaviour
             if (players[i].CustomProperties.ContainsKey("yDistance"))
                 yDist = System.Convert.ToSingle(players[i].CustomProperties["yDistance"]);
 
-            // stun 횟수 업데이트
             if (stunTexts != null && i < stunTexts.Length)
             {
                 stunTexts[i].text = stun.ToString();
             }
-            // jump 횟수 업데이트
             if (jumpTexts != null && i < jumpTexts.Length)
             {
                 jumpTexts[i].text = jump.ToString();
             }
-            // y축 거리 업데이트 (소수점 두 자리)
             if (distanceTexts != null && i < distanceTexts.Length)
             {
                 distanceTexts[i].text = yDist.ToString("F2");
@@ -120,22 +118,46 @@ public class EndingManager : MonoBehaviour
         }
 
         int playerCount = players.Length;
-        // 만약 플레이어 수가 텍스트 배열의 길이보다 적다면, 나머지 슬롯을 빈 문자열("")로 설정
+        // 나머지 슬롯은 빈 문자열로 설정
         for (int i = playerCount; i < nameTexts.Length; i++)
         {
-        nameTexts[i].text = "";
+            nameTexts[i].text = "";
         }
         for (int i = playerCount; i < stunTexts.Length; i++)
         {
-        stunTexts[i].text = "";
+            stunTexts[i].text = "";
         }
         for (int i = playerCount; i < jumpTexts.Length; i++)
         {
-        jumpTexts[i].text = "";
+            jumpTexts[i].text = "";
         }
         for (int i = playerCount; i < distanceTexts.Length; i++)
         {
-        distanceTexts[i].text = "";
+            distanceTexts[i].text = "";
+        }
+
+        if (players.Length > 1 && winnerName != null)
+        {
+        Photon.Realtime.Player winner = players[0];
+        float maxYDist = 0f;
+        foreach (var p in players)
+        {
+            float yd = 0f;
+            if (p.CustomProperties.ContainsKey("yDistance"))
+                yd = System.Convert.ToSingle(p.CustomProperties["yDistance"]);
+            Debug.Log($"플레이어 {p.NickName}의 yDistance: {yd}");
+            if (yd > maxYDist)
+            {
+                maxYDist = yd;
+                winner = p;
+            }
+        }
+        Debug.Log($"Winner 결정: {winner.NickName} with yDistance {maxYDist}");
+        winnerName.text = winner.NickName;
+        }
+        else if(players.Length == 1 && winnerName != null)
+        {
+            winnerName.text = "PLAYER";
         }
     }
 }
