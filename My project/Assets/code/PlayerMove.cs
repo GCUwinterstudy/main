@@ -12,7 +12,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     SpriteRenderer spriteRenderer; // 방향 전환을 위한 변수 
     Animator animator;         // 애니메이터 조작을 위한 변수 
     BoxCollider2D col2D;
-    
+
     public float minJumpForce = 20f;  // 최소 점프 강도
     public float maxJumpForce = 30f;  // 최대 점프 강도
     public float chargeTime = 2f;     // 최대 차징 시간
@@ -26,6 +26,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private float fallTimer = 0f;     // 하강 시간 누적용
     public float fallThreshold = 3f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
     public int stunCount = 0; // 각 플레이어의 stun 횟수
+
+    private GameObject currentTeleporter;
 
     private void Awake()
     {
@@ -98,6 +100,24 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         if (Input.GetKeyUp(KeyCode.Space) && !isStun && isGround)
         {
             PerformJump();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (currentTeleporter != null)
+            {
+                // 디버그: 현재 포탈과 연결된 destination의 이름 출력
+                Transform dest = currentTeleporter.GetComponent<Portal>().GetDestination();
+                if (dest != null)
+                {
+                    Debug.Log("Teleporting to: " + dest.name + " / " + dest.position);
+                    transform.position = dest.position;
+                }
+                else
+                {
+                    Debug.LogWarning("Destination is not assigned!");
+                }
+            }
         }
 
         // 디버그 로그는 개발 시 확인용 (필요 없으면 주석 처리)
@@ -177,7 +197,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     // 기절(Stun) 상태를 지정 시간 동안 유지하는 코루틴
     IEnumerator StunRoutine(float stunDuration)
     {
-        stunCount ++;
+        stunCount++;
         Debug.Log("stuned!");
         isStun = true;   // 기절 상태
         canWalk = false; // 이동 불가
@@ -277,5 +297,24 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
         // 두 방식 중 하나라도 충돌하면 지면에 있다고 판단
         return (rayHit.collider != null || rayHit2.collider != null);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("portal"))
+        {
+            currentTeleporter = collision.gameObject;
+            Debug.Log("Entered portal: " + collision.gameObject.name);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("portal"))
+        {
+            if (collision.gameObject == currentTeleporter)
+            {
+                Debug.Log("Exited portal: " + collision.gameObject.name);
+                currentTeleporter = null;
+            }
+        }
     }
 }
