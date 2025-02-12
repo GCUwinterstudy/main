@@ -17,9 +17,8 @@ public class Teleport : MonoBehaviour
                 Transform dest = currentTeleporter.GetComponent<Portal>().GetDestination();
                 if(dest != null)
                 {
-                    Debug.Log("Teleporting to: " + dest.name);
+                    Debug.Log("Teleporting to: " + dest.name + " / " + dest.position);
                     transform.position = dest.position;
-                    
                 }
                 else
                 {
