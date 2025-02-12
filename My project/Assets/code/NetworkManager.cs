@@ -297,19 +297,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     public override void OnDisconnected(DisconnectCause cause) {
-    // 만약 NetworkManager가 파괴되어 UI 참조가 null이라면 바로 리턴
-    if (MenuPanel == null) return;
-
-    MenuPanel.SetActive(true);
-    LobbyPanel.SetActive(false);
-    CreatePanel.SetActive(false);
-    JoinMenu.SetActive(false);
-    RoomPanel.SetActive(false);
-    OptionPanel.SetActive(false);
-
-    roomList.Clear();
-    selectedRoom = null;
-}
+        if (MenuPanel != null)
+        {
+            MenuPanel.SetActive(true);
+            LobbyPanel.SetActive(false);
+            CreatePanel.SetActive(false);
+            JoinMenu.SetActive(false);
+            RoomPanel.SetActive(false);
+            OptionPanel.SetActive(false);
+        }
+        
+        roomList.Clear();
+        selectedRoom = null;
+    }
 
     public override void OnRoomListUpdate(List<RoomInfo> updatedList) {
         foreach (RoomInfo info in updatedList) {
