@@ -185,6 +185,9 @@ MonoBehaviour:
   fallThreshold: 0.9
   stunCount: 0
   jumpCount: 0
+  jumpSound: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
+  stunSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  chargeSound: {fileID: 8300000, guid: 174818bacb99d49ad9cd485517c8ccd2, type: 3}
 --- !u!95 &5855995849297929179
 Animator:
   serializedVersion: 5
@@ -282,6 +285,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: isFlip
+  - Type: 9
+    SynchronizeType: 0
+    Name: PrincessWalk
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

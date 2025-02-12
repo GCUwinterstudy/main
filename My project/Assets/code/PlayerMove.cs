@@ -33,6 +33,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     // 현재 플레이어가 접촉 중인 포탈
     private GameObject currentTeleporter;
 
+    // 효과음
+    public AudioClip jumpSound;
+    public AudioClip stunSound;
+    public AudioClip chargeSound;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         // 오프라인 모드 설정 (싱글플레이)
@@ -40,6 +46,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.OfflineMode = true;
             Debug.Log("PhotonNetwork OfflineMode 활성화 (싱글플레이 모드)");
+        }
+
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
 
         rigid = GetComponent<Rigidbody2D>();
@@ -188,6 +200,11 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         rigid.velocity = new Vector2(0f, rigid.velocity.y);
         animator.SetBool("isStun", true);
 
+        if (stunSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(stunSound);
+        }
+
         yield return new WaitForSeconds(stunDuration);
 
         isStun = false;
@@ -205,6 +222,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         animator.SetBool("isCharging", true);
         currentChargeTime = 0f;
         canWalk = false;
+
+        if (chargeSound != null && audioSource != null) {
+            audioSource.loop = true;
+            audioSource.clip = chargeSound;
+            audioSource.Play();
+        }
     }
 
     void ChargeJump()
@@ -220,6 +243,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     {
         if (isCharging)
         {
+            if (audioSource != null && audioSource.isPlaying && audioSource.clip == chargeSound)
+            {
+                audioSource.Stop();
+                audioSource.loop = false;
+                audioSource.clip = null;
+            }
             float horizontalForce = 5f;
             float h = Input.GetAxisRaw("Horizontal");
             if (h < 0)
@@ -239,6 +268,11 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             isJumping = true;
             jumpCount++;
             UpdatePlayerStatsCustomProperties();
+
+            if (jumpSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(jumpSound);
+            }
         }
     }
 
