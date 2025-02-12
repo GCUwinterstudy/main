@@ -29,6 +29,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
+        if (!PhotonNetwork.IsConnected && !PhotonNetwork.OfflineMode)
+        {
+            PhotonNetwork.OfflineMode = true;
+            Debug.Log("PhotonNetwork OfflineMode 활성화 (싱글플레이 모드)");
+        }
+
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -37,7 +43,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (!photonView.IsMine) {
+        if (PhotonNetwork.IsConnected && !photonView.IsMine)
+        {
             return;
         }
 
@@ -102,7 +109,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     void FixedUpdate()
     {
-        if (!photonView.IsMine) {
+        if (PhotonNetwork.IsConnected && !photonView.IsMine)
+        {
             return;
         }
 
