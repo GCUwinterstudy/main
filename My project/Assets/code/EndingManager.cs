@@ -1,24 +1,29 @@
-using System.Collections;
 using UnityEngine;
+using TMPro;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class EndingManager : MonoBehaviour
 {
-    // 기존 맵 UI (예: 게임 중 표시되는 HUD나 미니맵 등)
+    // 기존 맵 UI (예: HUD, 미니맵 등)
     public GameObject mapUI;
-
     // 엔딩 패널 (엔딩 화면 UI)
     public GameObject endingPanel;
-
-    // 엔딩 상태를 나타내는 변수 (다른 스크립트에서 변경할 수 있습니다.)
+    // 엔딩 상태를 나타내는 전역 변수 (다른 스크립트에서 접근 가능)
     public static bool isEnding = false;
-    private bool changePanel = false;
-    private int num = 0;
-    public GameObject stunPanel;
-    public GameObject winnerPanel;
+
+    // 각 플레이어의 정보를 표시할 텍스트 배열 (Inspector에서 할당)
+    public TMP_Text[] nameTexts;      // 플레이어 이름 표시용
+    public TMP_Text[] stunTexts;      // stun 횟수 표시용
+    public TMP_Text[] jumpTexts;      // jump 횟수 표시용
+    public TMP_Text[] distanceTexts;  // 기준점과의 y축 거리 표시용
+
+    // 기준점 Y (예: 0 또는 원하는 값) → Inspector에서 설정하거나 기본값 사용
+    public static float referenceY = 0f;
 
     void Start()
     {
-        // 게임 시작 시엔 엔딩 패널은 비활성화 해둡니다.
+        // 엔딩 패널은 기본적으로 비활성화
         if (endingPanel != null)
         {
             endingPanel.SetActive(false);
@@ -27,30 +32,84 @@ public class EndingManager : MonoBehaviour
 
     void Update()
     {
-        // isEnding이 true로 설정되면, 엔딩 이벤트를 실행합니다.
+        // 엔딩이 시작되면 기존 UI를 끄고 엔딩 패널을 활성화한 후, 플레이어 스탯을 업데이트합니다.
         if (isEnding)
         {
             TriggerEnding();
-            // 한 번 실행된 후 더 이상 반복 실행되지 않도록 isEnding을 false로 전환하거나
-            // 별도의 플래그로 실행 여부를 관리합니다.
-            isEnding = false;
-            changePanel = true;
+            UpdateStatsDisplay();
+            isEnding = false; // 엔딩 이벤트는 한 번만 실행하도록 함
         }
     }
 
-    // 엔딩 이벤트를 처리하는 함수
+    // 엔딩 이벤트 처리: 기존 UI 끄고 엔딩 패널 활성화
     public void TriggerEnding()
     {
-        // 기존 맵 UI를 비활성화
         if (mapUI != null)
         {
             mapUI.SetActive(false);
         }
-        // 엔딩 패널을 활성화
         if (endingPanel != null)
         {
             endingPanel.SetActive(true);
         }
-        // 필요한 추가 엔딩 연출(예: 사운드, 애니메이션 등)을 여기서 실행할 수 있습니다.
+    }
+
+    // 각 플레이어의 스탯을 각기 다른 텍스트 배열에 업데이트하는 함수
+    void UpdateStatsDisplay()
+    {
+        Player[] players = PhotonNetwork.PlayerList;
+        for (int i = 0; i < players.Length; i++)
+        {
+            // 플레이어 이름 업데이트
+            if (nameTexts != null && i < nameTexts.Length)
+            {
+                nameTexts[i].text = players[i].NickName;
+            }
+
+            // 각 플레이어의 커스텀 프로퍼티에서 스탯 읽기
+            int stun = 0, jump = 0;
+            float yDist = 0f;
+            if (players[i].CustomProperties.ContainsKey("stunCount"))
+                stun = (int)players[i].CustomProperties["stunCount"];
+            if (players[i].CustomProperties.ContainsKey("jumpCount"))
+                jump = (int)players[i].CustomProperties["jumpCount"];
+            if (players[i].CustomProperties.ContainsKey("yDistance"))
+                yDist = System.Convert.ToSingle(players[i].CustomProperties["yDistance"]);
+
+            // stun 횟수 업데이트
+            if (stunTexts != null && i < stunTexts.Length)
+            {
+                stunTexts[i].text = stun.ToString();
+            }
+            // jump 횟수 업데이트
+            if (jumpTexts != null && i < jumpTexts.Length)
+            {
+                jumpTexts[i].text = jump.ToString();
+            }
+            // y축 거리 업데이트 (소수점 두 자리)
+            if (distanceTexts != null && i < distanceTexts.Length)
+            {
+                distanceTexts[i].text = yDist.ToString("F2");
+            }
+        }
+
+        int playerCount = players.Length;
+        // 만약 플레이어 수가 텍스트 배열의 길이보다 적다면, 나머지 슬롯을 빈 문자열("")로 설정
+        for (int i = playerCount; i < nameTexts.Length; i++)
+        {
+        nameTexts[i].text = "";
+        }
+        for (int i = playerCount; i < stunTexts.Length; i++)
+        {
+        stunTexts[i].text = "";
+        }
+        for (int i = playerCount; i < jumpTexts.Length; i++)
+        {
+        jumpTexts[i].text = "";
+        }
+        for (int i = playerCount; i < distanceTexts.Length; i++)
+        {
+        distanceTexts[i].text = "";
+        }
     }
 }

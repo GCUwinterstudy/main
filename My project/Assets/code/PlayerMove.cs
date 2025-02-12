@@ -7,10 +7,10 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class PlayerMove : MonoBehaviourPunCallbacks
 {
-    public float maxSpeed; // 최대 속력 변수 
-    Rigidbody2D rigid;         // 물리 이동을 위한 변수 
-    SpriteRenderer spriteRenderer; // 방향 전환을 위한 변수 
-    Animator animator;         // 애니메이터 조작을 위한 변수 
+    public float maxSpeed; // 최대 속력
+    Rigidbody2D rigid;           // 물리 이동을 위한 변수
+    SpriteRenderer spriteRenderer; // 방향 전환을 위한 변수
+    Animator animator;           // 애니메이터 조작을 위한 변수
     BoxCollider2D col2D;
 
     public float minJumpForce = 20f;  // 최소 점프 강도
@@ -25,12 +25,17 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private bool isStun = false;
     private float fallTimer = 0f;     // 하강 시간 누적용
     public float fallThreshold = 3f;  // 하강 시간이 이 값 이상이면 추락 상태로 판정
-    public int stunCount = 0; // 각 플레이어의 stun 횟수
 
+    // 각 플레이어별 stun 횟수와 jump 횟수
+    public int stunCount = 0;
+    public int jumpCount = 0;
+
+    // 현재 플레이어가 접촉 중인 포탈
     private GameObject currentTeleporter;
 
     private void Awake()
     {
+        // 오프라인 모드 설정 (싱글플레이)
         if (!PhotonNetwork.IsConnected && !PhotonNetwork.OfflineMode)
         {
             PhotonNetwork.OfflineMode = true;
@@ -46,31 +51,25 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     void Update()
     {
         if (PhotonNetwork.IsConnected && !photonView.IsMine)
-        {
             return;
-        }
 
-
-        // 키 입력은 Update에서 처리 (canWalk와 isStun 상태를 먼저 체크)
+        // 이동 및 방향 처리 (canWalk와 isStun 상태 확인)
         if (canWalk && !isStun)
         {
-            // 버튼에서 손을 뗄 때 속도를 약간 감소
             if (Input.GetButtonUp("Horizontal"))
             {
-                // normalized: 단위벡터 (방향만 남김)
                 rigid.velocity = new Vector2(0.5f * rigid.velocity.normalized.x, rigid.velocity.y);
             }
 
-            // 좌우 입력에 따른 스프라이트 방향 전환 및 isFlip변화
             if (Input.GetButtonDown("Horizontal"))
             {
                 float hInput = Input.GetAxisRaw("Horizontal");
-                if (hInput < 0) //좌측이동시 true
+                if (hInput < 0)
                 {
                     spriteRenderer.flipX = true;
                     animator.SetBool("isFlip", true);
                 }
-                else if (hInput > 0) //우측이동시 false
+                else if (hInput > 0)
                 {
                     spriteRenderer.flipX = false;
                     animator.SetBool("isFlip", false);
@@ -78,7 +77,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             }
         }
 
-        // 걷기 애니메이션 처리
         if (Mathf.Abs(rigid.velocity.x) < 0.2f)
             animator.SetBool("isWalking", false);
         else if (!isJumping)
@@ -91,22 +89,20 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         {
             StartCharging();
         }
-
         if (Input.GetKey(KeyCode.Space) && !isStun && isGround)
         {
             ChargeJump();
         }
-
         if (Input.GetKeyUp(KeyCode.Space) && !isStun && isGround)
         {
             PerformJump();
         }
 
+        // 포탈(teleporter) 처리 (E 키 입력)
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (currentTeleporter != null)
             {
-                // 디버그: 현재 포탈과 연결된 destination의 이름 출력
                 Transform dest = currentTeleporter.GetComponent<Portal>().GetDestination();
                 if (dest != null)
                 {
@@ -119,20 +115,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
                 }
             }
         }
-
-        // 디버그 로그는 개발 시 확인용 (필요 없으면 주석 처리)
-        // Debug.Log("isDown : " + isDown);
-        // Debug.Log("isGround : " + isGround);
-        // Debug.Log("isJumping : " + isJumping);
-        // Debug.Log("isFlip : " + isFlip);
     }
 
     void FixedUpdate()
     {
         if (PhotonNetwork.IsConnected && !photonView.IsMine)
-        {
             return;
-        }
 
         bool isGround = IsGrounded();
         float h = canWalk ? Input.GetAxisRaw("Horizontal") : 0f;
@@ -152,11 +140,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
             if (isFall)
             {
-                // 추락 상태 종료 후 착지 시 기절 처리
                 StartCoroutine(StunRoutine(2f)); // 2초 동안 기절
                 isFall = false;
             }
-            // 지면에 착지했을 때, 기절 상태가 아니라면 canWalk를 true로 설정
             if (!isJumping && !isCharging && !isDown && !isStun)
             {
                 canWalk = true;
@@ -167,17 +153,15 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             canWalk = false;
         }
 
-        // 하강 감지: y축 속도가 음수이고 아직 하강 상태가 아니면
         if (rigid.velocity.y < 0 && !isDown)
         {
             isDown = true;
             animator.SetTrigger("isDown");
         }
 
-        // 하강 시간 누적 및 추락 상태 판정
         if (isDown)
         {
-            fallTimer += Time.fixedDeltaTime; // FixedUpdate에서는 fixedDeltaTime 사용
+            fallTimer += Time.fixedDeltaTime;
             if (fallTimer >= fallThreshold && !isFall)
             {
                 isFall = true;
@@ -194,39 +178,32 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         }
     }
 
-    // 기절(Stun) 상태를 지정 시간 동안 유지하는 코루틴
+    // 기절 상태를 지정 시간 동안 유지하는 코루틴 (stun 시 custom property 업데이트)
     IEnumerator StunRoutine(float stunDuration)
     {
         stunCount++;
         Debug.Log("stuned!");
-        isStun = true;   // 기절 상태
-        canWalk = false; // 이동 불가
-
-        /*
-        // Custom Properties에 stunCount 업데이트
-        Hashtable props = new Hashtable();
-        props["stunCount"] = stunCount;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-        */
+        isStun = true;
+        canWalk = false;
         rigid.velocity = new Vector2(0f, rigid.velocity.y);
         animator.SetBool("isStun", true);
 
         yield return new WaitForSeconds(stunDuration);
 
-        // 기절 해제 후, 지면에 있다면 이동 가능 상태로 전환
         isStun = false;
         animator.SetBool("isStun", false);
         if (IsGrounded())
         {
             canWalk = true;
         }
+        UpdatePlayerStatsCustomProperties();
     }
 
     void StartCharging()
     {
         isCharging = true;
         animator.SetBool("isCharging", true);
-        currentChargeTime = 0f; // 차징 시간 초기화
+        currentChargeTime = 0f;
         canWalk = false;
     }
 
@@ -234,7 +211,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     {
         if (isCharging)
         {
-            // 차징 시간을 증가시키되 최대치 초과 방지
             currentChargeTime += Time.deltaTime;
             currentChargeTime = Mathf.Clamp(currentChargeTime, 0f, chargeTime);
         }
@@ -248,56 +224,59 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             float h = Input.GetAxisRaw("Horizontal");
             if (h < 0)
             {
-                // 왼쪽으로 힘 적용
                 rigid.AddForce(Vector2.left * horizontalForce, ForceMode2D.Impulse);
             }
             else if (h > 0)
             {
-                // 오른쪽으로 힘 적용
                 rigid.AddForce(Vector2.right * horizontalForce, ForceMode2D.Impulse);
             }
-
-            // 차징 비율(0~1)을 계산하여 점프 강도 결정
             float chargeRatio = currentChargeTime / chargeTime;
             float jumpForce = Mathf.Lerp(minJumpForce, maxJumpForce, chargeRatio);
-
-            // 점프 실행: y축 속도를 jumpForce로 설정
             rigid.velocity = new Vector2(rigid.velocity.x, jumpForce);
-
-            // 점프 충전 종료
             isCharging = false;
             currentChargeTime = 0f;
             animator.SetBool("isCharging", false);
-            isJumping = true; // 점프 상태로 설정
+            isJumping = true;
+            jumpCount++;
+            UpdatePlayerStatsCustomProperties();
         }
     }
 
+    // Custom Properties 업데이트 함수 (stunCount, jumpCount, yDistance)
+    void UpdatePlayerStatsCustomProperties()
+    {
+        PhotonHashtable props = new PhotonHashtable();
+        props["stunCount"] = stunCount;
+        props["jumpCount"] = jumpCount;
+        // 기준점은 EndingManager.referenceY (없으면 0으로 가정)
+        float referenceY = EndingManager.referenceY;
+        float yDistance = Mathf.Abs(transform.position.y - referenceY);
+        props["yDistance"] = yDistance;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+    }
+
+    // 지면 감지 함수
     bool IsGrounded()
     {
-        // BoxCast를 사용한 기본 지면 감지
         RaycastHit2D rayHit = Physics2D.BoxCast(
             col2D.bounds.center,
-            col2D.bounds.size * 0.9f, // 크기 보정
+            col2D.bounds.size * 0.9f,
             0f,
             Vector2.down,
-            0.2f,                    // 감지 거리
+            0.2f,
             LayerMask.GetMask("Platform")
         );
-
-        // 보조 감지: Raycast
         RaycastHit2D rayHit2 = Physics2D.Raycast(
             col2D.bounds.center,
             Vector2.down,
             0.2f,
             LayerMask.GetMask("Platform")
         );
-
-        // 디버깅용 시각화
         Debug.DrawRay(col2D.bounds.center, Vector2.down * 0.2f, Color.red);
-
-        // 두 방식 중 하나라도 충돌하면 지면에 있다고 판단
         return (rayHit.collider != null || rayHit2.collider != null);
     }
+
+    // 포탈(teleporter) 진입/탈출 처리
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("portal"))

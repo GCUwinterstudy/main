@@ -184,6 +184,7 @@ MonoBehaviour:
   canWalk: 1
   fallThreshold: 0.9
   stunCount: 0
+  jumpCount: 0
 --- !u!95 &5855995849297929179
 Animator:
   serializedVersion: 5
