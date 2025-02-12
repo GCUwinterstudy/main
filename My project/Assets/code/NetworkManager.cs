@@ -99,7 +99,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     #region UNITY_CALLBACKS
     private void Awake() {
-        Screen.SetResolution(1920, 1080, false);
+        //Screen.SetResolution(1920, 1080, false);
 
         MenuPanel.SetActive(true);
         SingleplayPanel.SetActive(false);
@@ -162,6 +162,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.SendRate = 60;
         PhotonNetwork.SerializationRate = 30;
     }
+    
     #endregion
 
     private void Start()
@@ -184,6 +185,24 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 MenuPanel.SetActive(true);
             });
 
+        if (ChatInput != null)
+        {
+            ChatInput.onSubmit.AddListener(OnChatSubmit);
+        }
+    }
+
+    private void Update()
+    {
+        if (ChatInput != null && ChatInput.isFocused && 
+        (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter)))
+        {
+            SendChat();
+        }
+    }
+
+    private void OnChatSubmit(string text)
+    {
+        SendChat();
     }
 
     private void OnDestroy()
@@ -707,6 +726,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         string msg = PhotonNetwork.NickName + " : " + ChatInput.text;
         PV.RPC("ChatRPC", RpcTarget.All, msg);
         ChatInput.text = "";
+        ChatInput.ActivateInputField(); 
     }
 
     [PunRPC]
