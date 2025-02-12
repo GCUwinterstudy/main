@@ -2,6 +2,8 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndingManager : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class EndingManager : MonoBehaviour
     public TMP_Text[] jumpTexts;      // jump 횟수 표시용
     public TMP_Text[] distanceTexts;  // 기준점과의 y축 거리 표시용
 
+    public Button mainMenuButton;
+    public Button exitButton;
+
     // 기준점 Y (예: 0 또는 원하는 값) → Inspector에서 설정하거나 기본값 사용
     public static float referenceY = 0f;
 
@@ -28,6 +33,11 @@ public class EndingManager : MonoBehaviour
         {
             endingPanel.SetActive(false);
         }
+
+        if (mainMenuButton != null)
+            mainMenuButton.onClick.AddListener(ReturnToMainMenu);
+        if (exitButton != null)
+            exitButton.onClick.AddListener(ExitGame);
     }
 
     void Update()
@@ -52,6 +62,22 @@ public class EndingManager : MonoBehaviour
         {
             endingPanel.SetActive(true);
         }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        if (PhotonNetwork.IsConnected) {
+            Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
+        } else {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
     // 각 플레이어의 스탯을 각기 다른 텍스트 배열에 업데이트하는 함수
