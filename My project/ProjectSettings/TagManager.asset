@@ -10,6 +10,7 @@ TagManager:
   - Princess
   - Platform
   - Wall
+  - movingPlatform
   layers:
   - Default
   - TransparentFX

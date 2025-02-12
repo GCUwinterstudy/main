@@ -4,56 +4,47 @@ using UnityEngine;
 
 public class moving : MonoBehaviour
 {
-    [SerializeField] float rightMax = 2.0f; //좌로 이동가능한 (x)최대값
-    [SerializeField] float leftMax = -2.0f; //우로 이동가능한 (x)최대값
-    float currentPosition; //현재 위치(x) 저장
+    [SerializeField] float rightMax = 0f; //좌로 이동가능한 (x)최대값
+    [SerializeField] float leftMax = 0f; //우로 이동가능한 (x)최대값
+    float currentRow; //현재 위치(x) 저장
+    float currentCol;
     float direction = 3.0f; //이동속도+방향
+
+    private Vector3 lastPosition;
+    public Vector3 DeltaPosition { get; private set; }
 
     void Start()
 
-    {
-
-        currentPosition = transform.position.x;
-
+    { 
+        currentRow = transform.position.x;
+        currentCol = transform.position.y;
+        lastPosition = transform.position;
     }
 
     void Update()
-
     {
-
-        currentPosition += Time.deltaTime * direction;
-
-        if (currentPosition >= rightMax)
-
-        {
-
-            direction *= -1;
-
-            currentPosition = rightMax;
-
-        }
+        currentRow += Time.deltaTime * direction;
 
         //현재 위치(x)가 우로 이동가능한 (x)최대값보다 크거나 같다면
-
         //이동속도+방향에 -1을 곱해 반전을 해주고 현재위치를 우로 이동가능한 (x)최대값으로 설정
-
-        else if (currentPosition <= leftMax)
-
+        if (currentRow >= rightMax)
         {
-
             direction *= -1;
-
-            currentPosition = leftMax;
-
+            currentRow = rightMax;
         }
 
         //현재 위치(x)가 좌로 이동가능한 (x)최대값보다 크거나 같다면
-
         //이동속도+방향에 -1을 곱해 반전을 해주고 현재위치를 좌로 이동가능한 (x)최대값으로 설정
+        else if (currentRow <= leftMax)
+        {
+            direction *= -1;
+            currentRow = leftMax;
+        }
+        //발판의 위치를 계산된 현재위치로 처리
+        transform.position = new Vector3(currentRow, currentCol, 0);
 
-        transform.position = new Vector3(currentPosition, 0, 0);
-
-        //"Stone"의 위치를 계산된 현재위치로 처리
-
+        DeltaPosition = transform.position - lastPosition;
+        lastPosition = transform.position;
+        //Debug.Log(DeltaPosition + " " + lastPosition);
     }
 }

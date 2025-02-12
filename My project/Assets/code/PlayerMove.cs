@@ -32,6 +32,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
     // 현재 플레이어가 접촉 중인 포탈
     private GameObject currentTeleporter;
+    // 현재 플레이어가 접촉 중인 이동발판
+    private moving currentPlatform;
+
 
     // 효과음
     public AudioClip jumpSound;
@@ -108,6 +111,12 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         if (Input.GetKeyUp(KeyCode.Space) && !isStun && isGround)
         {
             PerformJump();
+        }
+
+        //움직이는 발판 따라가기
+        if (currentPlatform != null)
+        {
+            transform.position += currentPlatform.DeltaPosition;
         }
 
         // 포탈(teleporter) 처리 (E 키 입력)
@@ -310,24 +319,34 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         return (rayHit.collider != null || rayHit2.collider != null);
     }
 
-    // 포탈(teleporter) 진입/탈출 처리
+    // 지형지물 진입/탈출 처리
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        //포탈(teleporter) 진입 처리
         if (collision.CompareTag("portal"))
         {
             currentTeleporter = collision.gameObject;
-            Debug.Log("Entered portal: " + collision.gameObject.name);
+        }
+        //움직이는 발판 진입 처리
+        if (collision.gameObject.CompareTag("movingPlatform"))
+        {
+            currentPlatform = collision.gameObject.GetComponent<moving>();
+            Debug.Log("collision");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
+        //포탈(teleporter) 탈출 처리
         if (collision.CompareTag("portal"))
         {
             if (collision.gameObject == currentTeleporter)
-            {
-                Debug.Log("Exited portal: " + collision.gameObject.name);
                 currentTeleporter = null;
-            }
+        }
+        //움직이는 발판 탈출 처리
+        if (collision.gameObject.CompareTag("movingPlatform"))
+        {
+            currentPlatform = null;
+            Debug.Log("release");
         }
     }
 }
