@@ -5,12 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - portal
-  - block_static
   - Bullet
   - Princess
   - Platform
   - Wall
   - movingPlatform
+  - fadePlatform
   layers:
   - Default
   - TransparentFX

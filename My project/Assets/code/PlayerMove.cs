@@ -132,14 +132,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             {
                 Transform dest = currentTeleporter.GetComponent<Portal>().GetDestination();
                 if (dest != null)
-                {
-                    Debug.Log("Teleporting to: " + dest.name + " / " + dest.position);
                     transform.position = dest.position;
-                }
-                else
-                {
-                    Debug.LogWarning("Destination is not assigned!");
-                }
             }
         }
 
@@ -340,7 +333,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         if (collision.gameObject.CompareTag("movingPlatform"))
         {
             currentPlatform = collision.gameObject.GetComponent<moving>();
-            Debug.Log("collision");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -354,8 +346,8 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         //움직이는 발판 탈출 처리
         if (collision.gameObject.CompareTag("movingPlatform"))
         {
-            currentPlatform = null;
-            Debug.Log("release");
+            if (collision.gameObject == currentPlatform)
+                currentPlatform = null;
         }
     }
 }
