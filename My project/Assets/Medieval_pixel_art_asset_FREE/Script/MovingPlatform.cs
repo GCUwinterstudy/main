@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class moving : MonoBehaviour
+public class MovingPlatform : MonoBehaviour
 {
     [SerializeField] float rightMax = 0f; //좌로 이동가능한 (x)최대값
     [SerializeField] float leftMax = 0f; //우로 이동가능한 (x)최대값
-    float currentRow; //현재 위치(x) 저장
-    float currentCol;
+    float currentRow, currentCol; //현재 위치
     float direction = 3.0f; //이동속도+방향
 
     private Vector3 lastPosition;

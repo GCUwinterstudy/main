@@ -32,9 +32,9 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     public int jumpCount = 0;
 
     // 현재 플레이어가 접촉 중인 포탈
-    private GameObject currentTeleporter;
+    private GameObject currentTeleporter = null;
     // 현재 플레이어가 접촉 중인 이동발판
-    private moving currentPlatform;
+    private MovingPlatform currentPlatform = null;
 
 
     // 효과음
@@ -325,14 +325,15 @@ public class PlayerMove : MonoBehaviourPunCallbacks
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //포탈(teleporter) 진입 처리
-        if (collision.CompareTag("portal"))
+        if (collision.CompareTag("portal") && currentTeleporter == null)
         {
             currentTeleporter = collision.gameObject;
         }
         //움직이는 발판 진입 처리
-        if (collision.gameObject.CompareTag("movingPlatform"))
+        if (collision.gameObject.CompareTag("movingPlatform") && currentPlatform == null)
         {
-            currentPlatform = collision.gameObject.GetComponent<moving>();
+            Debug.Log("Enter movingPlatform");
+            currentPlatform = collision.gameObject.GetComponent<MovingPlatform>();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -340,14 +341,16 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         //포탈(teleporter) 탈출 처리
         if (collision.CompareTag("portal"))
         {
-            if (collision.gameObject == currentTeleporter)
+            if (collision.gameObject == currentTeleporter && currentTeleporter != null)
                 currentTeleporter = null;
         }
         //움직이는 발판 탈출 처리
         if (collision.gameObject.CompareTag("movingPlatform"))
         {
-            if (collision.gameObject == currentPlatform)
+            if (collision.gameObject.GetComponent<MovingPlatform>() == currentPlatform && currentPlatform != null)
+            {
                 currentPlatform = null;
+            }
         }
     }
 }

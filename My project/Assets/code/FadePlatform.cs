@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.Tilemaps;
 using UnityEngine;
 
-public class fade : MonoBehaviour
+public class FadePlatform : MonoBehaviour
 {
     public float respawnTime = 2.0f; // 다시 나타나기까지의 시간
     public float waitTime = 10.0f; //사라지기 전까지 시간
