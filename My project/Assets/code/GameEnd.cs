@@ -13,6 +13,7 @@ public class GameEnd : MonoBehaviourPunCallbacks
     public Sprite sprite1;
     public float speed = 0.8f;
     private bool isWalking = false;
+    public float maxJumpForce = 1f;       // 엔딩 점프 힘
 
     void Awake()
     {
@@ -42,29 +43,31 @@ public class GameEnd : MonoBehaviourPunCallbacks
             string winnerName = PhotonNetwork.LocalPlayer.NickName;
             Debug.Log(winnerName);
             photonView.RPC("SetWinnerRPC", RpcTarget.All, winnerName);
-            StartCoroutine(EndRoutine(2.0f));
+            StartCoroutine(EndRoutine(4.0f));
         }
     }
 
     IEnumerator EndRoutine(float waitTime)
     {
-        Debug.Log("test");
+        Debug.Log("EndRoutine 시작");
 
-        // 먼저, 모든 클라이언트의 카메라 시점을 전환하기 위해 현재 플레이어의 ViewID 전달
+        // 모든 클라이언트에서 카메라 전환
         photonView.RPC("TriggerEndingCameraRPC", RpcTarget.All, photonView.ViewID);
 
-        // 엔딩 스프라이트와 애니메이션 적용
-        spriteRenderer.sprite = sprite1;
-        animator.SetTrigger("PrincessWalk");
+        // 모든 클라이언트에서 엔딩 애니메이션(걷기) 실행 및 오른쪽으로 보이도록 설정
+        photonView.RPC("SetEndingAnimationRPC", RpcTarget.All);
 
-        isWalking = true;
+        isWalking = true;  // 걷기 시작
 
-        // 대기 후, 모든 클라이언트에 엔딩 상태를 활성화하도록 RPC 호출
-        yield return new WaitForSeconds(waitTime);
+        // 2초간 걷기
+        yield return new WaitForSeconds(1.2f);
 
+        // 모든 클라이언트에서 강제 점프 실행
+        photonView.RPC("TriggerEndingJumpRPC", RpcTarget.All);
+
+        // 추가 대기 후 엔딩 상태 활성화 및 플레이어 제거
+        yield return new WaitForSeconds(1);
         photonView.RPC("TriggerEndingManagerRPC", RpcTarget.All);
-
-        // 모든 플레이어를 없앰
         photonView.RPC("RemovePlayerRPC", RpcTarget.All);
     }
 
@@ -93,5 +96,30 @@ public class GameEnd : MonoBehaviourPunCallbacks
     void RemovePlayerRPC()
     {
         PhotonNetwork.Destroy(gameObject);
+    }
+
+    [PunRPC]
+    void SetEndingAnimationRPC()
+    {
+        // 모든 클라이언트에서 엔딩 애니메이션 실행
+        if (spriteRenderer != null && animator != null)
+        {
+            spriteRenderer.sprite = sprite1;  // 엔딩 스프라이트 변경
+            spriteRenderer.flipX = false;
+            animator.SetBool("isFlip", false);
+            animator.SetTrigger("PrincessWalk");
+        }
+    }
+
+    [PunRPC]
+    void TriggerEndingJumpRPC()
+    {
+        ForceJump();
+    }
+
+    void ForceJump()
+    {
+        float jumpForce = maxJumpForce;
+        rig.velocity = new Vector2(rig.velocity.x, jumpForce);
     }
 }

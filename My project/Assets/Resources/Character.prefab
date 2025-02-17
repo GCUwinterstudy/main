@@ -317,3 +317,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite1: {fileID: 189971010, guid: d7136a6925d704c4a8728e8b3e877225, type: 3}
   speed: 5
+  maxJumpForce: 15
