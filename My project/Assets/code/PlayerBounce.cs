@@ -28,15 +28,12 @@ void OnCollisionEnter2D(Collision2D collision)
             if (Mathf.Abs(normal.x) > 0.5f && Mathf.Abs(normal.y) < 0.5f)
             {
                 Vector2 currentVelocity = rigid.velocity;
-                Vector2 bounceDirection = new Vector2(-currentVelocity.x * 10.0f, 0f);
                 
-                Debug.Log("bounceDirection = "+ bounceDirection);
-                Debug.Log("currentVelocity = "+ currentVelocity);
-                // AddForce ¹æ½ÄÀ¸·Î Æ¨±â±â
-                rigid.AddForce(bounceDirection, ForceMode2D.Impulse);
-
-                Debug.Log("XÃàÀ¸·Î Æ¨°å½À´Ï´Ù!");
-
+                Debug.Log("currentVelocity = " + currentVelocity);
+                Vector2 bounceDirection = new Vector2(-currentVelocity.y * bounceForce, currentVelocity.y);
+                rigid.velocity = bounceDirection; // ±âÁ¸ ¼Óµµ¸¦ µ¤¾î¾º¿ò
+ 
+                Debug.Log("bounceDirection = " + bounceDirection);
                 isBouncing = true;
                 Invoke("StopBouncing", bounceDuration); // ÀÏÁ¤ ½Ã°£ ÈÄ Æ¨±è »óÅÂ ÇØÁ¦
                 break;

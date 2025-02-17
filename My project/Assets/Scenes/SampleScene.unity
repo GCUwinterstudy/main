@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.056278255, g: 0.009438166, b: 0.0009432097, a: 1}
+  m_IndirectSpecularColor: {r: 0.056357797, g: 0.009486724, b: 0.0009414677, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5420,7 +5420,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1596405228486957739, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5739960444474883793, guid: 8f6d33208bc62464f9a64b0a09f5a1f0, type: 3}
       propertyPath: m_Size.x
@@ -10098,7 +10098,9 @@ PolygonCollider2D:
     - - {x: 7.160231, y: -2.1170602}
       - {x: 7.150835, y: -3.7995708}
       - {x: -7.2167172, y: -3.923054}
-      - {x: -7.0204096, y: 59.953167}
+      - {x: -6.934037, y: -1.9455428}
+      - {x: -6.920491, y: 9.75111}
+      - {x: -6.8623514, y: 59.953167}
       - {x: -7.9714117, y: 59.897835}
       - {x: -7.9483743, y: 70.22292}
       - {x: -6.9894037, y: 70.19446}
