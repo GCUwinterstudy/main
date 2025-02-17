@@ -206,9 +206,9 @@ MonoBehaviour:
   fallThreshold: 1
   stunCount: 0
   jumpCount: 0
-  jumpSound: {fileID: 0}
-  stunSound: {fileID: 0}
-  chargeSound: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
+  stunSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
+  chargeSound: {fileID: 8300000, guid: 174818bacb99d49ad9cd485517c8ccd2, type: 3}
 --- !u!114 &-4474369501343655333
 MonoBehaviour:
   m_ObjectHideFlags: 0
