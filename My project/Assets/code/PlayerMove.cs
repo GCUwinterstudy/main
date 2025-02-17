@@ -177,12 +177,14 @@ public class PlayerMove : MonoBehaviourPunCallbacks
 
         if (rigid.velocity.y < 0 && !isDown)
         {
+            //Debug.Log("rigid.velocity.y: " + rigid.velocity.y);
             isDown = true;
             animator.SetTrigger("isDown");
         }
 
         if (isDown)
         {
+            //Debug.Log("fallTimer: " + fallTimer + " / " + fallThreshold);
             fallTimer += Time.fixedDeltaTime;
             if (fallTimer >= fallThreshold && !isFall)
             {
@@ -221,6 +223,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         animator.SetBool("isStun", false);
         if (IsGrounded())
         {
+            Debug.Log("canWalk");
             canWalk = true;
         }
         UpdatePlayerStatsCustomProperties();
@@ -318,6 +321,7 @@ public class PlayerMove : MonoBehaviourPunCallbacks
             LayerMask.GetMask("Platform")
         );
         Debug.DrawRay(col2D.bounds.center, Vector2.down * 0.2f, Color.red);
+        Debug.Log("rayHit: "+rayHit.collider+ ", rayHit2: "+ rayHit2.collider);
         return (rayHit.collider != null || rayHit2.collider != null);
     }
 
@@ -332,7 +336,6 @@ public class PlayerMove : MonoBehaviourPunCallbacks
         //움직이는 발판 진입 처리
         if (collision.gameObject.CompareTag("movingPlatform") && currentPlatform == null)
         {
-            Debug.Log("Enter movingPlatform");
             currentPlatform = collision.gameObject.GetComponent<MovingPlatform>();
         }
     }
