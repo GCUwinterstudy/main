@@ -2,7 +2,7 @@
 
 **KINGJUMP**는 Unity 엔진을 사용해 제작한 게임으로, [JUMPKING](https://store.steampowered.com/app/1061090/Jump_King/)을 모델로 하여 개발된 카피 게임입니다. 기존 JUMPKING의 싱글 플레이 모드에 멀티플레이어 기능을 추가했습니다.
 
-
+![Initial](https://github.com/user-attachments/assets/dbdb1060-0167-48bd-ae25-4b58a0d3c8ed)
 
 ---
 
