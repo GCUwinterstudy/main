@@ -343,7 +343,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 sceneToLoad = "SampleScene";
                 break;
             case "Dungeon":
-                sceneToLoad = "ssseonjun";
+                sceneToLoad = "SampleScene2";
                 break;
             default:
                 return;

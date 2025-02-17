@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 5038a13078b267b43a2efb9b7016b38a
   - enabled: 1
-    path: Assets/Scenes/ssseonjun.unity
-    guid: 66b017607e0c6e9469ca59f25df1ba31
+    path: Assets/Scenes/SampleScene2.unity
+    guid: ef1a71de8a6ec0b4fb90f05cb2ad6586
   m_configObjects: {}

@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class PlayerSpawner : MonoBehaviourPunCallbacks
 {
-    public Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
+    public static Transform spawnPoint;
+    Vector3 spawnPosition = new Vector3(0f, 0f, 0f);
+
+    
     public float nameYOffset = 0f;
     private bool spawned = false;
 
@@ -23,6 +26,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
         }
         else
         {
+            
             SpawnCharacter();
         }
     }
@@ -39,6 +43,7 @@ public class PlayerSpawner : MonoBehaviourPunCallbacks
     void SpawnCharacter() 
     {
         spawned = true;
+        
         // 온라인이든 오프라인이든 항상 PhotonNetwork.Instantiate를 사용하여 캐릭터 생성
         GameObject character = PhotonNetwork.Instantiate("Character", spawnPosition, Quaternion.identity);
 
