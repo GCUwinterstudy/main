@@ -9909,7 +9909,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: -2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -43683,7 +43683,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
-  - {fileID: 254942948}
   - {fileID: 2092995475}
   - {fileID: 1985570123}
   - {fileID: 1304462968}
@@ -43699,3 +43698,4 @@ SceneRoots:
   - {fileID: 488521350}
   - {fileID: 690860913}
   - {fileID: 1879115762}
+  - {fileID: 254942948}
