@@ -25,5 +25,7 @@
   - Seonjun Park
   - Jaekyung Choi
   - Hyosin Kim
+- **기간**:
+  2025.01.08 - 2025.02.19
 
 ---
