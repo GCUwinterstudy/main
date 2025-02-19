@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.056332234, g: 0.00948602, b: 0.00094343803, a: 1}
+  m_IndirectSpecularColor: {r: 0.056357797, g: 0.009486724, b: 0.0009414677, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -689,33 +689,23 @@ Tilemap:
       m_TileObjectToInstantiateIndex: 65535
       dummyAlignment: 0
       m_AllTileFlags: 1073741825
-  - first: {x: -2, y: 3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 2
-      m_TileSpriteIndex: 2
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   m_AnimatedTiles: {}
   m_TileAssetArray:
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: fb2fd67bb9b7ab64eb34907d839c5c75, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: 0bb063cc3aa23564e9a05dee6c932c81, type: 2}
-  - m_RefCount: 1
-    m_Data: {fileID: 11400000, guid: 3b3e2f48c39f25044bdb376c92f7d805, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 1
     m_Data: {fileID: 719102406, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1703733471, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -911022537, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data:
       e00: 1
       e01: 0
@@ -734,7 +724,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 3
+  - m_RefCount: 2
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -28208,14 +28198,14 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.98701525, y: 3.0008008}
-      - {x: -0.98749393, y: 3.9825385}
-      - {x: -1.3404634, y: 3.6080983}
+    - - {x: -1.9829473, y: 2.9975302}
+      - {x: -1.9995418, y: 3.9926136}
+      - {x: -2.226653, y: 3.651152}
       - {x: -3.8790934, y: 3.6152642}
       - {x: -4.0103197, y: 3.956542}
       - {x: -4.009761, y: 2.991081}
       - {x: -3.750917, y: 3.208667}
-      - {x: -1.2220658, y: 3.2102242}
+      - {x: -2.2039576, y: 3.2245994}
   m_UseDelaunayMesh: 0
 --- !u!1 &1878975484
 GameObject:
