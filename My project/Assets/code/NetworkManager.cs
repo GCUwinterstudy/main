@@ -611,6 +611,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         RoomMapText.text = string.IsNullOrEmpty(map) ? "Unknown" : map;
 
+        switch(map)
+        {
+            case "Original":
+                if (OriginalImage2 != null) OriginalImage2.gameObject.SetActive(true);
+                if (DungeonImage2 != null) DungeonImage2.gameObject.SetActive(false);
+                break;
+            case "Dungeon":
+                if (OriginalImage2 != null) OriginalImage2.gameObject.SetActive(false);
+                if (DungeonImage2 != null) DungeonImage2.gameObject.SetActive(true);
+                break;
+            default:
+                if (OriginalImage2 != null) OriginalImage2.gameObject.SetActive(true);
+                if (DungeonImage2 != null) DungeonImage2.gameObject.SetActive(false);
+                break;
+        }
+
         Player[] playerList = PhotonNetwork.PlayerList;
         for (int i=0; i<Players.Length; i++) {
             if (i < playerList.Length) {
