@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.056357797, g: 0.009486724, b: 0.0009414677, a: 1}
+  m_IndirectSpecularColor: {r: 0.056332234, g: 0.00948602, b: 0.00094343803, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -673,7 +673,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 0
-      m_TileSpriteIndex: 0
+      m_TileSpriteIndex: 2
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -698,12 +698,12 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileSpriteArray:
-  - m_RefCount: 1
-    m_Data: {fileID: 719102406, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1703733471, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1703733471, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
+  - m_RefCount: 1
+    m_Data: {fileID: 719102406, guid: fe33485784bbc0847837b4daf5325fa4, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 2
     m_Data:
@@ -29020,7 +29020,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1985570123
 RectTransform:

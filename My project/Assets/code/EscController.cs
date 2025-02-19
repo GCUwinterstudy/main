@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
+using UnityEngine.EventSystems;
 
 public class EscController : MonoBehaviourPunCallbacks
 {
@@ -46,8 +47,19 @@ public class EscController : MonoBehaviourPunCallbacks
             // 우선 optionsPanel이 켜져 있다면 optionsPanel만 꺼짐
             if (optionsPanel != null && optionsPanel.activeSelf)
             {
-                optionsPanel.SetActive(false);
-                return;
+                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject != null &&
+                    EventSystem.current.currentSelectedGameObject.transform.IsChildOf(optionsPanel.transform))
+                {
+                    // 드롭다운이나 다른 OptionPanel 내부 UI 사용 중이면 아무 것도 하지 않음
+                    return;
+                }
+                else
+                {
+                    // 그렇지 않다면 OptionPanel을 닫음
+                    optionsPanel.SetActive(false);
+                    Debug.Log("ESC 키로 OptionPanel 닫힘");
+                    return;
+                }
             }
 
             // optionsPanel이 꺼져있는 경우 ESC패널을 토글
@@ -89,20 +101,20 @@ public class EscController : MonoBehaviourPunCallbacks
 
     public void ReturnToMainMenu()
     {
-    isPaused = false;
+        isPaused = false;
     
-    if (optionsPanel != null) {
-        optionsPanel.SetActive(false);
-        Debug.Log("ReturnToMainMenu: OptionsPanel 비활성화");
-    }
+        if (optionsPanel != null) {
+            optionsPanel.SetActive(false);
+            Debug.Log("ReturnToMainMenu: OptionsPanel 비활성화");
+        }
 
-    if (PhotonNetwork.IsConnected) {
-        Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.Disconnect();
-    } else {
-        SceneManager.LoadScene("MainMenu");
-    }
+        if (PhotonNetwork.IsConnected) {
+            Debug.Log("ReturnToMainMenu 호출됨. PhotonNetwork.LeaveRoom() 실행");
+            PhotonNetwork.LeaveRoom();
+            PhotonNetwork.Disconnect();
+        } else {
+            SceneManager.LoadScene("MainMenu");
+        }
     
     
     }
