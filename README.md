@@ -22,9 +22,9 @@
 - **배포 방식**: GitHub를 통한 무료 공개
 - **기여자**:
   - YoungDu Park
-  - Seonjun Park
-  - Jaekyung Choi
-  - Hyosin Kim
+  - SeonJun Park
+  - JaeKyung Choi
+  - HyoSin Kim
 - **기간**:
   - 2025.01.08 - 2025.02.19
 
