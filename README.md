@@ -23,7 +23,7 @@
 - **기여자**:
   - YoungDu Park
   - SeonJun Park
-  - JaeKyung Choi
+  - JaeKyeong Choi
   - HyoSin Kim
 - **기간**:
   - 2025.01.08 - 2025.02.19
